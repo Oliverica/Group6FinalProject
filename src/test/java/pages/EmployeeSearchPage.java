@@ -7,7 +7,8 @@ import utils.CommonMethods;
 
 public class EmployeeSearchPage extends CommonMethods {
 
-
+    @FindBy(id = "empsearch_id")
+    public WebElement employeeIDSearchField;
 
     public EmployeeSearchPage() {
 

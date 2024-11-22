@@ -7,6 +7,17 @@ import utils.CommonMethods;
 
 public class DashboardPage extends CommonMethods {
 
+    @FindBy(id = "welcome")
+    public WebElement welcomeMessage;
+
+    @FindBy(id = "menu_pim_viewPimModule")
+    public WebElement pimMenuButton;
+
+    @FindBy(id = "menu_pim_addEmployee")
+    public WebElement addEmployeeButton;
+
+    @FindBy(id = "menu_dashboard_index")
+    public WebElement dashboardMenu;
 
     public DashboardPage() {
         PageFactory.initElements(driver, this);

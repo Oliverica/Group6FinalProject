@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
+import java.util.Random;
 
 public class CommonMethods extends PageInitializer{
 
@@ -26,7 +27,6 @@ public class CommonMethods extends PageInitializer{
             case "Chrome":
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--headless");
-                //options.setHeadless(true);
                 driver = new ChromeDriver(options);
                 //driver = new ChromeDriver();
                 break;
@@ -122,5 +122,10 @@ public class CommonMethods extends PageInitializer{
     public static void jsClick(WebElement element) {
         getJSExecutor().executeScript("arguments[0].click();", element);
 
+    }
+
+    public static int generateNumbers() {
+        Random random = new Random();
+        return 100000 + random.nextInt(900000); //generates number fromm 100000 to 900000
     }
 }
