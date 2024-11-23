@@ -26,9 +26,7 @@ public class CommonMethods extends PageInitializer{
             case "Chrome":
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--headless");
-                //options.setHeadless(true);
                 driver = new ChromeDriver(options);
-                //driver = new ChromeDriver();
                 break;
             case "FireFox":
                 driver = new FirefoxDriver();
@@ -89,11 +87,9 @@ public class CommonMethods extends PageInitializer{
 
         TakesScreenshot ts = (TakesScreenshot) driver;
         byte[] picBytes = ts.getScreenshotAs(OutputType.BYTES);
-        //it is not going to take another screenshot, instead it will consider picByte
-        //i.e array of byte as a source file for transfer
         File sourceFile = ts.getScreenshotAs(OutputType.FILE);
 
-        try {//add path to the constants for screen shot yourself to resolve the error in red
+        try {
             FileUtils.copyFile(sourceFile, new File(Constants.SCREENSHOT_FILEPATH + fileName +
                     " " + getTimeStamp("yyyy-MM-dd-HH-mm-ss") + ".png"));
         } catch (IOException e) {
@@ -105,9 +101,6 @@ public class CommonMethods extends PageInitializer{
     public static String getTimeStamp(String pattern) {
 
         Date date = new Date();
-        //yyyy-MM-dd-hh-mm-ss
-        //dd-MM-yyyy-mm-hh-ss
-        //to get the date in my acceptable format, i need to format it
         SimpleDateFormat sdf = new SimpleDateFormat(pattern);
 
         return sdf.format(date);
