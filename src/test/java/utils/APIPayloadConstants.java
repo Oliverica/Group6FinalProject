@@ -24,4 +24,3 @@ public class APIPayloadConstants {
         return obj.toString();
     }
 }
-

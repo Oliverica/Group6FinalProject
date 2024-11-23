@@ -24,4 +24,3 @@ public class Hooks extends CommonMethods {
         closeBrowser();
     }
 }
-
