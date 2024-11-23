@@ -9,15 +9,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features/",
         glue = "steps",
         dryRun = false,
-<<<<<<< Updated upstream
-        tags = "@profilePhotoUpload",
-=======
-<<<<<<< HEAD
-        tags = "@Jobdetails",
-=======
-        tags = "@profilePhotoUpload",
->>>>>>> Marina
->>>>>>> Stashed changes
+        tags = "@addByFullName",
         plugin = {"pretty","html:target/cucumber.html","json:target/cucumber.json",
                 "rerun:target/failed.txt"}
 )

@@ -1,10 +1,3 @@
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> Marina
->>>>>>> Stashed changes
 package steps;
 
 import io.cucumber.java.After;
@@ -30,12 +23,5 @@ public class Hooks extends CommonMethods {
         scenario.attach(pic, "image/png", scenario.getName());
         closeBrowser();
     }
-<<<<<<< Updated upstream
 }
-=======
-<<<<<<< HEAD
-}
-=======
-}
->>>>>>> Marina
->>>>>>> Stashed changes
+
