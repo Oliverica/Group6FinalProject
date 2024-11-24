@@ -8,6 +8,15 @@ import utils.CommonMethods;
 public class EmployeeSearchPage extends CommonMethods {
 
 
+    @FindBy(id="menu_pim_viewEmployeeList")
+    public WebElement employeeListBT;
+
+    @FindBy(xpath ="//div[@id='tableWrapper']//table[@id='resultTable']//a[contains(@href, 'empNumber/100624')]")
+    public WebElement RandomIdClick;
+
+
+
+
 
     public EmployeeSearchPage() {
 
