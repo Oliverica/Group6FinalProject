@@ -3,6 +3,7 @@ package utils;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,21 +15,19 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
+import java.util.Random;
 
 public class CommonMethods extends PageInitializer{
 
     public static WebDriver driver;
 
-
     public static void openBrowserAndLaunchApplication() {
 
         switch (ConfigReader.read("browser")) {
             case "Chrome":
-               // ChromeOptions options = new ChromeOptions();
-               // options.addArguments("--headless");
-                //options.setHeadless(true);
-                driver = new ChromeDriver();
-                //driver = new ChromeDriver();
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--headless");
+                driver = new ChromeDriver(options);
                 break;
             case "FireFox":
                 driver = new FirefoxDriver();
@@ -89,11 +88,9 @@ public class CommonMethods extends PageInitializer{
 
         TakesScreenshot ts = (TakesScreenshot) driver;
         byte[] picBytes = ts.getScreenshotAs(OutputType.BYTES);
-        //it is not going to take another screenshot, instead it will consider picByte
-        //i.e array of byte as a source file for transfer
         File sourceFile = ts.getScreenshotAs(OutputType.FILE);
 
-        try {//add path to the constants for screen shot yourself to resolve the error in red
+        try {
             FileUtils.copyFile(sourceFile, new File(Constants.SCREENSHOT_FILEPATH + fileName +
                     " " + getTimeStamp("yyyy-MM-dd-HH-mm-ss") + ".png"));
         } catch (IOException e) {
@@ -105,9 +102,6 @@ public class CommonMethods extends PageInitializer{
     public static String getTimeStamp(String pattern) {
 
         Date date = new Date();
-        //yyyy-MM-dd-hh-mm-ss
-        //dd-MM-yyyy-mm-hh-ss
-        //to get the date in my acceptable format, i need to format it
         SimpleDateFormat sdf = new SimpleDateFormat(pattern);
 
         return sdf.format(date);
@@ -122,5 +116,10 @@ public class CommonMethods extends PageInitializer{
     public static void jsClick(WebElement element) {
         getJSExecutor().executeScript("arguments[0].click();", element);
 
+    }
+
+    public static int generateNumbers() {
+        Random random = new Random();
+        return 100000 + random.nextInt(900000); //generates number fromm 100000 to 900000
     }
 }
