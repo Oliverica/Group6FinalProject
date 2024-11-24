@@ -8,8 +8,8 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/test/resources/features/",
         glue = "steps",
-        dryRun = false,
-        tags = "@Jobdetails",
+        dryRun = true,
+        tags = "@addEmployeeLogin",
         plugin = {"pretty","html:target/cucumber.html","json:target/cucumber.json",
                 "rerun:target/failed.txt"}
 )

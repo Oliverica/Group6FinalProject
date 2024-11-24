@@ -9,10 +9,10 @@ public class UserManagementPage extends CommonMethods{
     public WebElement userManagement;
 
     @FindBy(id="btnAdd")
-    public void addButton;
+    public WebElement addButton;
 
     @FindBy (id="btnDelete")
-    public void deleteButton;
+    public WebElement deleteButton;
 
     @FindBy(id="id=searchSystemUser_userName")
     public  WebElement usernameField;
@@ -21,31 +21,36 @@ public class UserManagementPage extends CommonMethods{
     public WebElement userRoleDropdown;
 
     @FindBy (id="searchSystemUser_employeeName_empName")
-    public void WebElement employeeNameField;
+    public WebElement employeeNameField;
 
     @FindBy (id="systemUser_userName")
-    public void WebElement systemUsername;
+    public WebElement systemUsername;
 
     @FindBy (id="systemUser_status")
-    public void WebElement statusDropdown;
+    public WebElement statusDropdown;
 
     @FindBy (id="systemUser_password")
-    public void WebElement systemPassword;
+    public WebElement systemPassword;
 
     @FindBy (id="systemUser_confirmPassword")
-    public void WebElement confirmPassword;
+    public WebElement confirmPassword;
 
     @FindBy (id="btnSave")
-    public void WebElement btnSave;
+    public WebElement btnSave;
 
 
     @FindBy (id="searchBtn")
-    public void WebElement searchButton;
+    public WebElement searchButton;
 
     @FindBy (id="searchSystemUser_userName")
-    public void WebElement searchUsername;
+    public WebElement searchUsername;
 
     @FindBy (id="dialogDeleteBtn")
-    public void WebElement confirmedDeletionBtn;
+    public WebElement confirmedDeletionBtn;
+
+    public UserManagementPage(){
+        PageFactory.initElements(driver,this);
+
+    }
 
 }
