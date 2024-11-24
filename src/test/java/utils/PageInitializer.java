@@ -18,5 +18,6 @@ public class PageInitializer {
         employeeSearchPage = new EmployeeSearchPage();
         dashboardPage = new DashboardPage();
         userManagementPage= new UserManagementPage();
+        addDependents=new AddDependentsPage();
     }
 }
