@@ -7,7 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="CucumberBasics" />
-        <module name="Group6B20" />
+        <module name="GroupProject" />
       </profile>
     </annotationProcessing>
   </component>
