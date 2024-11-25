@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
 
+
 public class CommonMethods extends PageInitializer{
 
     public static WebDriver driver;
@@ -68,6 +69,9 @@ public class CommonMethods extends PageInitializer{
     public static void click (WebElement element) {
         waitForElementToBeClickable(element);
         element.click();
+    }
+    public static void waitForVisibility(WebElement element){
+        getWait().until(ExpectedConditions.visibilityOf(element));
     }
 
     public static void selectFromDropDown(WebElement dropDown, int index) {
