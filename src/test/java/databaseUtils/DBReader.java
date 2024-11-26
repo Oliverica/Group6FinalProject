@@ -35,6 +35,8 @@ public class DBReader {
                 tableData.add(rowMap);
             }
         } catch (SQLException sqlException) {
+            System.out.println("SQL Exception occured while fetching data: "
+                     + sqlException.getMessage());
             sqlException.printStackTrace();
         }
         return tableData;

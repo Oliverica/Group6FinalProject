@@ -17,6 +17,7 @@ import java.time.Duration;
 import java.util.Date;
 import java.util.Random;
 
+
 public class CommonMethods extends PageInitializer{
 
     public static WebDriver driver;
@@ -68,6 +69,9 @@ public class CommonMethods extends PageInitializer{
         waitForElementToBeClickable(element);
         element.click();
     }
+    public static void waitForVisibility(WebElement element){
+        getWait().until(ExpectedConditions.visibilityOf(element));
+    }
 
     public static void selectFromDropDown(WebElement dropDown, int index) {
         Select sel = new Select(dropDown);
@@ -82,6 +86,12 @@ public class CommonMethods extends PageInitializer{
     public static void selectFromDropDown(String value, WebElement dropDown) {
         Select sel = new Select(dropDown);
         sel.selectByValue(value);
+    }
+    public String getSelectedOption(WebElement dropdown){
+        Select select=new Select(dropdown);
+
+        WebElement selectedElement=select.getFirstSelectedOption();
+        return selectedElement.getText();
     }
 
     public static byte[] takeScreenshot(String fileName) {
