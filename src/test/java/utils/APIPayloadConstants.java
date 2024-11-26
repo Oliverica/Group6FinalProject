@@ -17,6 +17,30 @@ public class APIPayloadConstants {
         return jsonObject.toString();
 
     }
+
+    public static String createEmployeeJsonPayloadDynamic(String emp_firstname,
+                                                          String emp_lastname,
+                                                          String emp_middle_name,
+                                                          String emp_gender,
+                                                          String emp_birthday,
+                                                          String emp_status,
+                                                          String emp_job_title) {
+        JSONObject object = new JSONObject();
+        object.put("emp_firstname", emp_firstname);
+        object.put("emp_lastname", emp_lastname);
+        object.put("emp_middle_name", emp_middle_name);
+        object.put("emp_gender", emp_gender);
+        object.put("emp_birthday", emp_birthday);
+        object.put("emp_status", emp_status);
+        object.put("emp_job_title", emp_job_title);
+
+        return object.toString();
+
+    }
+
+
+}
+
     public static String generateTokenPayload(String email, String password) {
         JSONObject obj = new JSONObject();
         obj.put("email", email);
@@ -24,3 +48,4 @@ public class APIPayloadConstants {
         return obj.toString();
     }
 }
+
