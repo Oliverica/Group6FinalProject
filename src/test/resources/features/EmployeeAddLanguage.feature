@@ -32,15 +32,3 @@ Feature: Add language proficiency details on the employee profile
     Then competency levels "Speaking", "Reading", "Writing" are displayed
     When employee clicks on Comment text box
     Then employee is able to enter a comment "Validating Comment Text Box"
-
-
-
-
-
-
-
-
-
-
-
-
