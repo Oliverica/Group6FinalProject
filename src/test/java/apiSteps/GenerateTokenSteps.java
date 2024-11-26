@@ -20,7 +20,6 @@ public class GenerateTokenSteps {
     @When("POST request to generate token is called")
     public void post_request_to_generate_token_is_called() {
         APIConstants.response = APIConstants.request.when().post(APIConstants.GENERATE_TOKEN);
-        APIConstants.response = APIConstants.request.when().post(APIConstants.GENERATE_TOKEN);
         APIConstants.token = "Bearer " + APIConstants.response.jsonPath().getString("token");
     }
 
