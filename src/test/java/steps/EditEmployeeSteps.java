@@ -25,6 +25,8 @@ public class EditEmployeeSteps extends CommonMethods {
     public String empID;
     public String empGenderCode;
     public String empNationCode;
+    public String genderOption1;
+    public String genderOption2;
 
     @When("user clicks on unique employee")
     public void user_clicks_on_unique_employee() {
@@ -78,7 +80,9 @@ public class EditEmployeeSteps extends CommonMethods {
     @When("options {string} and {string} are presented")
     public void options_and_are_presented(String btnMale, String btnFemale) {
         Assert.assertEquals(editEmployeePage.maleBtn.getText(),btnMale);
+        genderOption1=btnMale;
         Assert.assertEquals(editEmployeePage.femaleBtn.getText(),btnFemale);
+        genderOption2=btnFemale;
 
     }
     @Then("user clicks on {string} button")
@@ -134,6 +138,7 @@ public class EditEmployeeSteps extends CommonMethods {
     public void userClicksOnEditSaveButton() {
         click(editEmployeePage.btnSave);
     }
+
     @Then("user sees a message {string}")
     public void user_sees_a_message(String message) {
         Assert.assertTrue(editEmployeePage.successMsg.getText().contains(message));
@@ -152,12 +157,12 @@ public class EditEmployeeSteps extends CommonMethods {
     }
     @Then("the employee gender is updated")
     public void the_employee_gender_is_updated() {
-        if (empGender.equals("Male")){
+        if (empGender.equals(genderOption1)){
             empGenderCode="1";
             String isChecked = editEmployeePage.maleBtnStatus.getAttribute("checked");
             Assert.assertNotNull(isChecked);
         }
-        if (empGender.equals("Female")){
+        if (empGender.equals(genderOption2)){
             empGenderCode="2";
             String isChecked = editEmployeePage.femaleBtnStatus.getAttribute("checked");
             Assert.assertNotNull(isChecked);
@@ -173,7 +178,7 @@ public class EditEmployeeSteps extends CommonMethods {
     @Then("the marital status is updated")
     public void the_marital_status_is_updated() {
         Select select = new Select(editEmployeePage.maritalStatus);
-      Assert.assertEquals(select.getFirstSelectedOption().getText(),empMaritalStatus);
+        Assert.assertEquals(select.getFirstSelectedOption().getText(),empMaritalStatus);
     }
 
 
@@ -188,7 +193,6 @@ public class EditEmployeeSteps extends CommonMethods {
             Assert.assertEquals(empMaritalStatus,record.get("emp_marital_status") );
             Assert.assertEquals(empGenderCode, record.get("emp_gender"));
             Assert.assertEquals(empNationCode, record.get("nation_code"));
-
         }
     }
 }
