@@ -7,25 +7,22 @@ import utils.CommonMethods;
 
 public class DashboardPage extends CommonMethods {
 
-    @FindBy(id = "menu_pim_viewPimModule")
-    public WebElement pimMenu;
 
     @FindBy(id = "menu_pim_addEmployee")
-    public WebElement addEmployeeOption;
+    public WebElement addEmployeeButton;
     @FindBy(id="welcome")
-    public WebElement welcomeText;
-
-    @FindBy(id="menu_pim_viewPimModule")
-    public WebElement pimOption;
-
-    @FindBy(id="menu_pim_viewEmployeeList")
-    public WebElement empListOption;
-
-    @FindBy(xpath = "//a[@id='welcome']")
     public WebElement welcomeMessage;
 
-    public DashboardPage(){
-        PageFactory.initElements(driver,this);
+    @FindBy(id="menu_pim_viewPimModule")
+    public WebElement pimMenuButton;
 
-    }
-}
+    @FindBy(id="menu_pim_viewEmployeeList")
+    public WebElement employeeListButton;
+
+
+    @FindBy(id = "menu_dashboard_index")
+    public WebElement dashboardMenu;
+
+    public DashboardPage(){
+            PageFactory.initElements(driver,this);
+                

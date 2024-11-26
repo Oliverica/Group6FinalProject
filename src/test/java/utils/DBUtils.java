@@ -6,7 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DBReader {
+public class DBUtils {
 
     public static List<Map<String, String>> fetch(String query) {
 
@@ -34,8 +34,6 @@ public class DBReader {
                 tableData.add(rowMap);
             }
         } catch (SQLException sqlException) {
-            System.out.println("SQL Exception occured while fetching data: "
-                     + sqlException.getMessage());
             sqlException.printStackTrace();
         }
         return tableData;

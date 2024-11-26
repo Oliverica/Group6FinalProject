@@ -1,4 +1,3 @@
-
 package steps;
 
 import io.cucumber.java.After;
@@ -11,6 +10,9 @@ public class Hooks extends CommonMethods {
     @Before
     public void start() {
         openBrowserAndLaunchApplication();
+
+        PageInitializer.initializePageObjects();
+
     }
 
     @After

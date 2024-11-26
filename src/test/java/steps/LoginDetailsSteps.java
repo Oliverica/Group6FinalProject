@@ -22,12 +22,12 @@ public class LoginDetailsSteps extends CommonMethods {
     public void user_navigates_to_the_dashboard_page() throws InterruptedException {
 
         Assert.assertTrue("Dashboard page is not displayed",
-                dashboardPage.welcomeText.isDisplayed());
+                dashboardPage.welcomeMessage.isDisplayed());
     }
 
     @Then("user clicks on PIM option")
     public void user_clicks_on_pim_option() {
-        click(dashboardPage.pimOption);
+        click(dashboardPage.pimMenuButton);
     }
 
     @Then("user clicks on add employee option")
@@ -203,3 +203,4 @@ public class LoginDetailsSteps extends CommonMethods {
 
 
 }
+
