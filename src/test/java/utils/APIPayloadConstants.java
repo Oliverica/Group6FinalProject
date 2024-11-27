@@ -18,6 +18,12 @@ public class APIPayloadConstants {
 
     }
 
+    public static String generateTokenPayload(String email, String password) {
+        JSONObject obj = new JSONObject();
+        obj.put("email", email);
+        obj.put("password", password);
+        return obj.toString();
+    }
     public static String createEmployeeJsonPayloadDynamic(String emp_firstname,
                                                           String emp_lastname,
                                                           String emp_middle_name,
@@ -36,16 +42,6 @@ public class APIPayloadConstants {
 
         return object.toString();
 
-    }
-
-
-}
-
-    public static String generateTokenPayload(String email, String password) {
-        JSONObject obj = new JSONObject();
-        obj.put("email", email);
-        obj.put("password", password);
-        return obj.toString();
     }
 }
 

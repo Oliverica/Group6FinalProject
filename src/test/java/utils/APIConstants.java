@@ -5,6 +5,7 @@ import io.restassured.specification.RequestSpecification;
 
 public class APIConstants {
 
+    public static  String token;
     public static final String baseURL = RestAssured.baseURI
             = "http://hrm.syntaxtechs.net/syntaxapi/api";
     public static Response response;
