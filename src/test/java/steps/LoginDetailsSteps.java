@@ -26,10 +26,10 @@ public class LoginDetailsSteps extends CommonMethods {
         Assert.assertTrue(dashboardPage.welcomeMessage.isDisplayed());
     }
 
-//    @Then("user clicks on PIM option")
-//    public void user_clicks_on_pim_option() {
-//        click(dashboardPage.pimMenuButton);
-//    }
+    @Then("user clicks on PIM option")
+    public void user_clicks_on_pim_option() {
+        click(dashboardPage.pimMenuButton);
+    }
 
     @Then("user clicks on add employee option")
     public void user_clicks_on_add_employee_option() throws InterruptedException {
