@@ -12,18 +12,15 @@ public class PageInitializer {
     public static MyInfoPage myInfoPage;
     public static AddDependentPage addDependentPage;
 
-
-    public static void initializePageObjects(){
+    public static void initializePageObjects() {
 
         loginPage = new LoginPage();
         addEmployeePage = new AddEmployeePage();
         employeeSearchPage = new EmployeeSearchPage();
         dashboardPage = new DashboardPage();
-        addDependentPage=new AddDependentPage();
+        addDependentPage = new AddDependentPage();
         employeeProfilePage = new EmployeeProfilePage();
         editEmployeePage = new EditEmployeePage();
         myInfoPage = new MyInfoPage();
-
-
     }
 }

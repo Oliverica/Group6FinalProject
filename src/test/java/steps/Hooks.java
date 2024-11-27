@@ -10,9 +10,6 @@ public class Hooks extends CommonMethods {
     @Before
     public void start() {
         openBrowserAndLaunchApplication();
-
-        PageInitializer.initializePageObjects();
-
     }
 
     @After

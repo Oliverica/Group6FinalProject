@@ -200,7 +200,4 @@ public class LoginDetailsSteps extends CommonMethods {
         Assert.assertEquals("Passwords do not match", expectedMessage, actualMessage);
 
     }
-
-
 }
-

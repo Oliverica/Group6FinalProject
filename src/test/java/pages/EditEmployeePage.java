@@ -44,7 +44,6 @@ public class EditEmployeePage extends CommonMethods {
     @FindBy (xpath = "//div[@class='message success fadable']")
     public WebElement successMsg;
 
-
     public EditEmployeePage() {
         PageFactory.initElements(driver, this);
     }

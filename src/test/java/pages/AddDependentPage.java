@@ -19,7 +19,6 @@ public class AddDependentPage extends CommonMethods {
     @FindBy(xpath = "//select[@id='dependent_relationshipType']/option[@value='child']")
     public WebElement childOption;
 
-
     @FindBy(id = "dependent_name")
     public WebElement dependentName;
 
@@ -52,7 +51,6 @@ public class AddDependentPage extends CommonMethods {
 
     @FindBy(xpath = "//table[@class='ui-datepicker-calendar']/tbody/tr/td")
     public List<WebElement> dayDropdown;
-
 
     @FindBy(id = "empsearch_employee_name_empName")
     public WebElement nameToSearch;
@@ -87,7 +85,6 @@ public class AddDependentPage extends CommonMethods {
     @FindBy(xpath = "//td[@class='dependentName']/a[text()='ama']")
     public WebElement dependentLink;
 
-
     @FindBy(xpath = "//form[@id='frmEmpDelDependents']")
     public WebElement assignedDependentsTable;
 
@@ -96,10 +93,6 @@ public class AddDependentPage extends CommonMethods {
     public List<WebElement> getDependentsRows(){
         return dependentRows;
     }
-
-
-
-
 
     public AddDependentPage() {
         PageFactory.initElements(driver, this);

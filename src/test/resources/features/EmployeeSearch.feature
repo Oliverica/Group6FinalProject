@@ -36,9 +36,3 @@ Scenario: Search for employee by full name
     When user enters invalid employee ID "115601Y" in the ID field
     And user clicks Search button
     Then user is able to see an error message "No Records Found"
-
-
-
-
-
-

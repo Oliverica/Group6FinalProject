@@ -4,13 +4,10 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import utils.CommonMethods;
-import utils.DBUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 

@@ -31,7 +31,3 @@ Feature: Creating a new employee related scenarios
     And user enters an employee full name and existing ID "2023962"
     And user clicks on Save button
     Then clear error message is displayed
-
-
-
-
