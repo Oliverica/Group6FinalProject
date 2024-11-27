@@ -10,14 +10,24 @@ public class PageInitializer {
     public static EmployeeProfilePage employeeProfilePage;
     public static JobDetailsPage jobDetailsPage;
     public static MembershipPage membershipPage;
+    public static EditEmployeePage editEmployeePage;
+    public static MyInfoPage myInfoPage;
+    public static AddDependentPage addDependentPage;
+
 
     public static void initializePageObjects(){
+
         loginPage = new LoginPage();
         addEmployeePage = new AddEmployeePage();
         employeeSearchPage = new EmployeeSearchPage();
         dashboardPage = new DashboardPage();
+        addDependentPage=new AddDependentPage();
         employeeProfilePage = new EmployeeProfilePage();
         jobDetailsPage=new JobDetailsPage();
         membershipPage=new MembershipPage();
+        editEmployeePage = new EditEmployeePage();
+        myInfoPage = new MyInfoPage();
+
+
     }
 }
