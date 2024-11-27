@@ -45,17 +45,6 @@ public class JobDetailsSteps extends CommonMethods {
     public void user_clicks_on_edit_save_button_to_unlock_the_employee_job_details() {
         click(jobDetailsPage.saveEditDetails);
 
-    }
-    @Then("all required details are editable and displayed")
-    public void all_required_details_are_editable_and_displayed() {
-        List<WebElement> elements = jobDetailsPage.requiredList;
-        for (WebElement element : elements) {
-            Assert.assertTrue(element.isDisplayed() && element.isEnabled());
-        }
-        List<WebElement>date=jobDetailsPage.requiredDate;
-        for (WebElement data:date){
-            Assert.assertTrue(data.isDisplayed() && data.isEnabled());
-        }
 
     }
     @When("user add required fields {string}, {string},{string},{string},{string}")

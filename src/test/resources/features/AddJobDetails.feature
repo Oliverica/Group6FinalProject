@@ -37,19 +37,8 @@ Scenario: Validate and save the mandatory fields
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+  @Jobdetails
+  Scenario: Adding current job details for employees as an Admin.
 
 
 
