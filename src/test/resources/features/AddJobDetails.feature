@@ -1,36 +1,48 @@
 Feature:Job Details
   Background:
+    When user enters valid credentials
+    And clicks login button
+    And user clicks PIM option
+    And user clicks employee list option
+    And user navigates to the employee profile by providing employee ids "42843534"
+
 
   @JobDetails
-  Scenario: Adding Membership Details as an Employee
-    Given user is able to access HRMS application
-    When user clicks PIM option and Employee List
-    And user clicks any Employee id from the list
-    And user clicks Job Button
-    Then all the required fields are displayed and editable and validated
-      | Job Title         |
-      | Employment Status |
-      | Job Category      |
-      | Joined Date       |
-      | Sub Unit          |
-      | Location          |
-      | Start Date        |
-      | End Date          |
-      | Contract Details  |
+  Scenario: Adding Job Details as an User
+    When user clicks on employee id and click Job button
+    And user clicks on EditSave button to unlock the employee job details
+    Then all required details are editable and displayed
 
-     @mandatoryfields
-    Scenario:test Save Without Mandatory Fields
-       Given user is able to access HRMS application
-       When user clicks PIM option and Employee List
-       And user clicks any Employee id from the list
-       And user clicks Job Button
-       And user clicks saveEdit button
-       When the Admin fills in the job details for the employee:
-         | JobTitle     | Employment Status | job Category | joined Date  | Sub Unit    | Location    |
-         | IT Support   | Full-time        | Sales       | 2023-01-01  | Finance    | New York    |
-       Then the system should validate that all mandatory fields are filled
-       And the system should save the job details in the employee's profile
-       And the changes should be reflected in the database
+@SaveAndValidate
+Scenario: Validate and save the mandatory fields
+  When user clicks on employee id and click Job button
+  And user clicks on EditSave button to unlock the employee job details
+  When user add required fields "advisor", "active","2015-12-15","IT Support","Big Office"
+  And user validate that fields are not empty
+  And user clicks EditSave button
+  Then user can see the success message
+  And all the details has been saved "advisor", "active","2015-12-15","IT Support","Big Office"
+
+  @checkMandatoryFields
+  Scenario: Checking Mandatory fields
+    When user clicks on employee id and click Job button
+    And user clicks on EditSave button to unlock the employee job details
+    When user don't add all the required fields "advisor", "active","IT Support"
+    And user clicks EditSave button
+    Then System should gives an error "Missing Fields"
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

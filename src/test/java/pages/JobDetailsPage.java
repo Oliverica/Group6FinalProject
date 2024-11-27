@@ -3,7 +3,6 @@ package pages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 import utils.CommonMethods;
 
 import java.util.List;
@@ -13,12 +12,14 @@ public class JobDetailsPage extends CommonMethods {
     @FindBy(xpath ="//body/div/div[3]/div/div/ul/li[6]")
     public WebElement jobClick;
 
+    @FindBy(xpath = "//div/table/tbody/tr/td[2]")
+    public WebElement IdButton;
 
     @FindBy(id = "btnSave")
     public WebElement saveEditDetails;
 
-    @FindBy(xpath="//div/form/fieldset/ol/li/label")
-    public List<WebElement> labelDetails;
+    @FindBy(id="job_eeo_category")
+    public WebElement jobCategory;
 
 
     @FindBy(xpath = "//select[@id='job_job_title']")
@@ -37,6 +38,11 @@ public class JobDetailsPage extends CommonMethods {
     @FindBy(xpath = "//select[@id='job_location']")
     public WebElement empLocation;
 
+    @FindBy(xpath = "//body/div/div[3]/div[1]/div[2]/div[2]/form/fieldset/ol/li/select")
+    public List<WebElement> requiredList;
+
+    @FindBy(xpath = "//body/div/div[3]/div[1]/div[2]/div[2]/form/fieldset/ol/li/input")
+    public List<WebElement> requiredDate;
 
     @FindBy(xpath="//body/div/div[3]/div/div[2]/div[2]/div[contains(text(), 'Successfully Updated')]")
     public WebElement successMessage;

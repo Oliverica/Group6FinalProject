@@ -8,6 +8,8 @@ public class PageInitializer {
     public static EmployeeSearchPage employeeSearchPage;
     public static DashboardPage dashboardPage;
     public static EmployeeProfilePage employeeProfilePage;
+    public static JobDetailsPage jobDetailsPage;
+    public static MembershipPage membershipPage;
 
     public static void initializePageObjects(){
         loginPage = new LoginPage();
@@ -15,5 +17,7 @@ public class PageInitializer {
         employeeSearchPage = new EmployeeSearchPage();
         dashboardPage = new DashboardPage();
         employeeProfilePage = new EmployeeProfilePage();
+        jobDetailsPage=new JobDetailsPage();
+        membershipPage=new MembershipPage();
     }
 }

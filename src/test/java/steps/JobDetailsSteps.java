@@ -1,156 +1,145 @@
 package steps;
 
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.eo.Se;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import utils.CommonMethods;
 import utils.ConfigReader;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 
 public class JobDetailsSteps extends CommonMethods {
-    @Given("user is able to access HRMS application")
-    public void user_is_able_to_access_hrms_application() {
+    @When("user enters valid credentials")
+    public void user_enters_valid_credentials() {
         sendText(ConfigReader.read("userName"), loginPage.usernameField);
         sendText(ConfigReader.read("password"), loginPage.passwordField);
-        click(loginPage.loginButton);
     }
-    @When("user clicks PIM option and Employee List")
-    public void user_clicks_pim_option_and_employee_list() {
-        click(dashboardPage.btnPIM);
-        click(employeeSearchPage.employeeListBT);
+    @When("clicks login button")
+    public void clicks_login_button() {
+       click(loginPage.loginButton);
     }
-
-    @When("user clicks any Employee id from the list")
-    public void user_clicks_any_employee_id_from_the_list() {
-      click(employeeSearchPage.RandomIdClick);
+    @When("user clicks PIM option")
+    public void user_clicks_pim_option() {
+        click(dashboardPage.pimMenuButton);
     }
-    @When("user clicks Job Button")
-    public void user_clicks_job_button() {
-        click(jobDetailsPage.jobClick);
-
+    @When("user clicks employee list option")
+    public void user_clicks_employee_list_option() {
+        click(dashboardPage.employeeListButton);
     }
-    @Then("all the required fields are displayed and editable and validated")
-    public void all_the_required_fields_are_displayed_and_editable_and_validated(io.cucumber.datatable.DataTable dataTable) {
-
+    @When("user navigates to the employee profile by providing employee ids {string}")
+    public void user_navigates_to_the_employee_profile_by_providing_employee_ids(String ids) {
+        sendText(ids, employeeSearchPage.employeeIDSearchField);
+        click(employeeSearchPage.searchButton);
+    }
+    @When("user clicks on employee id and click Job button")
+    public void user_clicks_on_employee_id_and_click_job_button() {
+       click(jobDetailsPage.IdButton);
+       click(jobDetailsPage.jobClick);
+    }
+    @When("user clicks on EditSave button to unlock the employee job details")
+    public void user_clicks_on_edit_save_button_to_unlock_the_employee_job_details() {
         click(jobDetailsPage.saveEditDetails);
 
-        //extract expected labels from DataTable
-        List<String> expectedDetails = dataTable.asList();
-
-
-
-     //extract actual labels from WebElements
-        List<WebElement> actualDetails = jobDetailsPage.labelDetails;
-
-      //Declare a new List of String to store actualDetails
-        List<String> actualTexts = new ArrayList<>();
-
-
-
-
-        for (WebElement element : actualDetails) {
-            if(element.isDisplayed() && element.isEnabled()){
-                actualTexts.add(element.getText().trim());
-
-
-            }
-
+    }
+    @Then("all required details are editable and displayed")
+    public void all_required_details_are_editable_and_displayed() {
+        List<WebElement> elements = jobDetailsPage.requiredList;
+        for (WebElement element : elements) {
+            Assert.assertTrue(element.isDisplayed() && element.isEnabled());
+        }
+        List<WebElement>date=jobDetailsPage.requiredDate;
+        for (WebElement data:date){
+            Assert.assertTrue(data.isDisplayed() && data.isEnabled());
         }
 
-        System.out.println("This is actual text " + actualTexts);
-
-
-        for (String expected : expectedDetails) {
-            // Assert that each expected label name is in the actualTexts list
-
-            boolean isPresent=actualTexts.contains(expected.trim());
-
-            System.out.println(expected);
-            System.out.println(actualTexts);
-            System.out.println(isPresent);
-
-            Assert.assertTrue(expected,isPresent);
-
-        }
     }
-    @When("user clicks saveEdit button")
-    public void user_clicks_save_edit_button() {
-        click(jobDetailsPage.saveEditDetails);
-    }
-    @When("the Admin fills in the job details for the employee:")
-    public void the_admin_fills_in_the_job_details_for_the_employee(io.cucumber.datatable.DataTable dataTable) {
-        Map<String,String> details=dataTable.asMap();
-
-        String key=details.values().toString();
-
-
-
-        String jobTitle= details.get(0);
-        String empStatus= details.get(1);
-        String joinedDate= details.get(2);
-        String subunit= details.get(3);
-        String location= details.get(4);
-
-
-
-
-        selectFromDropDown(jobDetailsPage.jobTitleField,jobTitle);
-        selectFromDropDown(jobDetailsPage.empStatusField,empStatus);
-        selectFromDropDown(jobDetailsPage.joinedDate,joinedDate);
-        selectFromDropDown(jobDetailsPage.subUnit,subunit);
+    @When("user add required fields {string}, {string},{string},{string},{string}")
+    public void user_all_required_fields(String title, String status, String date, String unit, String location) {
+        selectFromDropDown(jobDetailsPage.jobTitleField,title) ;
+        selectFromDropDown(jobDetailsPage.empStatusField,status);
+        sendText(date, jobDetailsPage.joinedDate);
+        selectFromDropDown(jobDetailsPage.subUnit,unit);
         selectFromDropDown(jobDetailsPage.empLocation,location);
 
+    }
+
+    @When("user validate that fields are not empty")
+    public void user_validate_that_fields_are_not_empty() {
+
+        Assert.assertNotNull("All the required fields are not null",jobDetailsPage.requiredList);
+        Assert.assertNotNull("All the required data are not null",jobDetailsPage.joinedDate);
 
 
 
 
     }
-    @Then("the system should validate that all mandatory fields are filled")
-    public void the_system_should_validate_that_all_mandatory_fields_are_filled() {
-        Assert.assertNotNull(jobDetailsPage.jobTitleField.getText());
-        Assert.assertNotNull(jobDetailsPage.empStatusField.getText());
-        Assert.assertNotNull(jobDetailsPage.joinedDate.getText());
-        Assert.assertNotNull(jobDetailsPage.subUnit.getText());
-        Assert.assertNotNull(jobDetailsPage.empLocation.getText());
+    @When("user clicks EditSave button")
+    public void user_clicks_edit_save_button() {
+        click(jobDetailsPage.saveEditDetails);
+    }
 
+    @Then("user can see the success message")
+    public void user_can_see_the_success_message() {
+       Assert.assertTrue("Success message is displayed",jobDetailsPage.successMessage.isDisplayed());
 
+    }
 
+    @When("user don't add all the required fields {string}, {string},{string}")
+    public void user_don_t_add_all_the_required_fields(String title, String status, String unit) {
+        selectFromDropDown(jobDetailsPage.jobTitleField,title) ;
+        selectFromDropDown(jobDetailsPage.empStatusField,status);
+        selectFromDropDown(jobDetailsPage.subUnit,unit);
+    }
+    @Then("System should gives an error {string}")
+    public void system_should_gives_an_error(String ErrorMessage) {
+        Assert.assertEquals("Error message does not match",jobDetailsPage.successMessage.getText(),ErrorMessage);
+    }
+    @Then("all the details has been saved {string}, {string},{string},{string},{string}")
+    public void all_the_details_has_been_saved(String title, String status, String date, String unit, String location) {
+        Select select=new Select(jobDetailsPage.jobTitleField);
+        Select sel1=new Select(jobDetailsPage.empStatusField);
+        Select sel3=new Select(jobDetailsPage.subUnit);
+        Select sel4=new Select(jobDetailsPage.empLocation);
+        Assert.assertEquals(select.getFirstSelectedOption().getText(),title);
+        Assert.assertEquals(sel1.getFirstSelectedOption().getText(),status);
+        Assert.assertEquals(sel3.getFirstSelectedOption().getText(),unit);
+        Assert.assertEquals(sel4.getFirstSelectedOption().getText(),location);
+        System.out.println(jobDetailsPage.joinedDate.getText());
 
 
 
     }
-    @Then("the system should save the job details in the employee's profile")
-    public void the_system_should_save_the_job_details_in_the_employee_s_profile() {
-        Assert.assertTrue(jobDetailsPage.successMessage.isDisplayed());
-    }
-    @Then("the changes should be reflected in the database")
-    public void the_changes_should_be_reflected_in_the_database() {
-
-
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
