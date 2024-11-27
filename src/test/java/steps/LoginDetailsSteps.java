@@ -25,10 +25,10 @@ public class LoginDetailsSteps extends CommonMethods {
                 dashboardPage.welcomeMessage.isDisplayed());
     }
 
-    @Then("user clicks on PIM option")
-    public void user_clicks_on_pim_option() {
-        click(dashboardPage.pimMenuButton);
-    }
+//    @Then("user clicks on PIM option")
+//    public void user_clicks_on_pim_option() {
+//        click(dashboardPage.pimMenuButton);
+//    }
 
     @Then("user clicks on add employee option")
     public void user_clicks_on_add_employee_option() throws InterruptedException {
@@ -194,13 +194,11 @@ public class LoginDetailsSteps extends CommonMethods {
 
     }
 
-    @Then("error message {string} should be displayed")
-    public void error_message_should_be_displayed(String expectedMessage) {
+
+    @Then("error message {string} should be displayed here")
+    public void errorMessageShouldBeDisplayedHere(String expectedMessage) {
         String actualMessage = addEmployeePage.passwordMismatchError.getText();
         Assert.assertEquals("Passwords do not match", expectedMessage, actualMessage);
-
     }
-
-
 }
 
