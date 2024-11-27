@@ -30,6 +30,9 @@ public class EmployeeSearchPage extends CommonMethods {
     @FindBy(xpath = "//td[@colspan='8']")
     public WebElement noFoundMessage;
 
+    @FindBy (id="menu_pim_viewEmployeeList")
+    public WebElement employeeListBtn;
+
     public EmployeeSearchPage() {
 
         PageFactory.initElements(driver, this);

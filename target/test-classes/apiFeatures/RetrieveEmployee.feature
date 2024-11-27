@@ -6,7 +6,7 @@ Feature: Get the created employee
 
 @api @artem @valid
 Scenario: Get the created employee by valid ID
-  Given a request is prepared to get the created the employee by valid ID "115601A"
+  Given a request is prepared to get the created the employee by valid ID "115714A"
   When a GET call is made to get the employee
   Then the status for get call is 200
   And the data coming from the GET call should be

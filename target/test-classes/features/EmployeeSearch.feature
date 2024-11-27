@@ -4,6 +4,7 @@ Background:
   When user enters username and password
   And clicks on login button
   And user clicks on PIM option
+  And user clicks on Employee List button
 
   @artem @search
 Scenario: Search for employee by full name
@@ -18,16 +19,22 @@ Scenario: Search for employee by full name
     Then user is able to see some results
     Examples:
     |name|
-    |Boris|
-    |boris|
-    |Bori |
-    |boriS|
-    |greben|
-    |gReBeN|
+    |boRi|
+
+  @artem @search @multi
+  Scenario: Search for employee by partial and ignore case name (different variations)
+    When user has a list of partial names to check and he search for them one by one
+      |name|
+      |Boris|
+      |boris|
+      |Bori |
+      |boriS|
+      |greben|
+      |gReBeN|
 
     @artem @search
   Scenario: Search for employee by id
-    When user enters valid employee ID "115601A" in the ID field
+    When user enters valid employee ID "115714A" in the ID field
     And user clicks Search button
     Then user is able to see the unique employee
 
