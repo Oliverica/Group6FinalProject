@@ -37,10 +37,6 @@ public class APIPayloadConstants {
         return object.toString();
 
     }
-
-
-}
-
     public static String generateTokenPayload(String email, String password) {
         JSONObject obj = new JSONObject();
         obj.put("email", email);
@@ -48,4 +44,5 @@ public class APIPayloadConstants {
         return obj.toString();
     }
 }
+
 

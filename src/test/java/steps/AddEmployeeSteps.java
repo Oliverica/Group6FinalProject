@@ -1,15 +1,12 @@
 package steps;
 
-import databaseUtils.DBReader;
-import io.cucumber.java.en.Given;
+import utils.DBReader;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import pages.DashboardPage;
 import utils.*;
 
 import java.io.IOException;
-import java.sql.*;
 import java.util.List;
 import java.util.Map;
 
