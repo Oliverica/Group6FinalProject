@@ -17,6 +17,7 @@ public class APIConstants {
     public static final String GENERATE_TOKEN=baseURL+"/generateToken.php";
     public static final String GET_ONE_EMPLOYEE=baseURL+"/getOneEmployee.php";
     public static final String UPDATE_EMPLOYEE=baseURL+"/updateEmployee.php";
+    public static final String DELETE_EMPLOYEE=baseURL+"/deleteEmployee.php";
 
 
     public static final String HEADER_CONTENT_TYPE_KEY=baseURL+"Content/Type";

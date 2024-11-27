@@ -132,4 +132,6 @@ public class CommonMethods extends PageInitializer{
         Random random = new Random();
         return 100000 + random.nextInt(900000); //generates number fromm 100000 to 900000
     }
+
+
 }

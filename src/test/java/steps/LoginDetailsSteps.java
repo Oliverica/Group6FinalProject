@@ -21,8 +21,9 @@ public class LoginDetailsSteps extends CommonMethods {
     @And("user navigates to the dashboard page")
     public void user_navigates_to_the_dashboard_page() throws InterruptedException {
 
-        Assert.assertTrue("Dashboard page is not displayed",
-                dashboardPage.welcomeMessage.isDisplayed());
+        Assert.assertEquals("Welcome Admin",
+                dashboardPage.welcomeMessage.getText());
+        Assert.assertTrue(dashboardPage.welcomeMessage.isDisplayed());
     }
 
 //    @Then("user clicks on PIM option")
