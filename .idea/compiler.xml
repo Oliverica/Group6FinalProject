@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="CucumberBasics" />
         <module name="GroupProject" />
+        <module name="Group6B20" />
       </profile>
     </annotationProcessing>
   </component>

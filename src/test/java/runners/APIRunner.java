@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/apifeatures/",
         glue = "apiSteps",
         dryRun = false,
-        tags = "@invalid",
+        tags = "@artem",
         plugin = {"pretty","html:target/cucumber.html","json:target/cucumber.json",
                 "rerun:target/failed.txt"}
 )

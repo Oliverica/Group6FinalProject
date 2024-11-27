@@ -4,6 +4,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 
+
 public class APIConstants {
 
     public static final String baseURL = RestAssured.baseURI
@@ -16,6 +17,7 @@ public class APIConstants {
     public static final String GENERATE_TOKEN=baseURL+"/generateToken.php";
     public static final String GET_ONE_EMPLOYEE=baseURL+"/getOneEmployee.php";
     public static final String UPDATE_EMPLOYEE=baseURL+"/updateEmployee.php";
+    public static final String DELETE_EMPLOYEE=baseURL+"/deleteEmployee.php";
 
     public static final String HEADER_CONTENT_TYPE_KEY=baseURL+"Content/Type";
     public static final String HEADER_CONTENT_TYPE_VALUE=baseURL+"application/json";

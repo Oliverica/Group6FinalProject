@@ -1,15 +1,20 @@
 package steps;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.EmployeeSearchPage;
 import utils.CommonMethods;
 import utils.ConfigReader;
+
+import java.util.List;
+import java.util.Map;
 
 public class EmployeeSearch extends CommonMethods {
     public String fullName;
@@ -100,5 +105,34 @@ public class EmployeeSearch extends CommonMethods {
     @Then("user is able to see an error message {string}")
     public void userIsAbleToSeeAnErrorMessage(String message) {
         Assert.assertEquals(employeeSearchPage.noFoundMessage.getText(),message);
+    }
+    @When("user has a list of partial names to check and he search for them one by one")
+    public void user_has_a_list_of_partial_names_to_check_and_he_search_for_them_one_by_one(io.cucumber.datatable.DataTable dataTable) {
+        List<Map<String, String>> partialNames=dataTable.asMaps();
+        for (Map<String, String> name:partialNames) {
+            getWait().until(ExpectedConditions.textToBePresentInElementValue(employeeSearchPage.emloyeeNameSearchField, "Type for hints..."));
+            sendText(name.get("name"), employeeSearchPage.emloyeeNameSearchField);
+            this.partialName = name.get("name");
+            actions.moveToElement(employeeSearchPage.emloyeeNameSearchField).sendKeys(Keys.ESCAPE).perform();
+            click(employeeSearchPage.searchButton);
+            boolean employeeFound = false;
+            for (int i = 0; i < employeeSearchPage.allFirstNames.size(); i++) {
+                String pageFirstName = employeeSearchPage.allFirstNames.get(i).getText().trim();
+                String pageLastName = employeeSearchPage.allLastNames.get(i).getText().trim();
+                if (pageFirstName.toLowerCase().contains(partialName.toLowerCase()) || pageLastName.toLowerCase().contains(partialName.toLowerCase())) {
+                    employeeFound = true;
+                    break;
+                }
+
+            }
+            Assert.assertTrue(employeeFound);
+            click(employeeSearchPage.employeeListBtn);
+        }
+
+    }
+
+    @And("user clicks on Employee List button")
+    public void userClicksOnEmployeeListButton() {
+        click(employeeSearchPage.employeeListBtn);
     }
 }

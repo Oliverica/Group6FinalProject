@@ -7,9 +7,9 @@ import utils.CommonMethods;
 
 public class DashboardPage extends CommonMethods {
 
-
     @FindBy(id = "menu_pim_addEmployee")
     public WebElement addEmployeeButton;
+
     @FindBy(id = "welcome")
     public WebElement welcomeMessage;
 
@@ -18,7 +18,6 @@ public class DashboardPage extends CommonMethods {
 
     @FindBy(id = "menu_pim_viewEmployeeList")
     public WebElement employeeListButton;
-
 
     @FindBy(id = "menu_dashboard_index")
     public WebElement dashboardMenu;
