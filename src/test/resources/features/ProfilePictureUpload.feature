@@ -10,12 +10,12 @@ Feature: Profile Photo Upload
   @profilePhotoUpload @unsupportedFileType @passed
   Scenario: File upload with unsupported file types
     When user selects a file with a .bmp or .tiff extension
-    Then error message "Failed to Save: File Type Not Allowed" is displayed
+    Then error message for saving photo "Failed to Save: File Type Not Allowed" is displayed
 
   @profilePhotoUpload @oversizedFile @passed
   Scenario: File upload with oversized file
     And user selects a file that exceeds permitted size in MB
-    Then error message "Failed to Save: File Size Exceeded" should be displayed
+    Then error message for saving photo "Failed to Save: File Size Exceeded" should be displayed
 
   @profilePhotoUpload @incorrectDimensions @passed
   Scenario: File upload with incorrect dimensions

@@ -14,7 +14,6 @@ Feature: Add Dependents to Employee Profile
     Then the user clicks on Dependent tab
     And the user clicks on Add button to add dependent
 
-
   @getTheUser
   Scenario Outline: Add a dependent with a valid data
     When the user enters dependent name as "<name>"
@@ -27,7 +26,6 @@ Feature: Add Dependents to Employee Profile
       |Michael Lee   |Child       |2000-01-11 |
       |Michael Jordan|Parent      |1960-09-11 |
 
-
   @missingOrInvalidFields
   Scenario Outline: Add a dependent with with missing or invalid fields
     When the user sends a request to add a dependent with a following data: a dependent with "<name>",and "<relationship>"
@@ -37,6 +35,7 @@ Feature: Add Dependents to Employee Profile
       |Mike          |             |Required        |
       |Michael Lee   |Child        |Required        |
       |              |Parent       |Required        |
+
   @addMultiple
   Scenario: Add multiple dependents for an employee
     When the user sends a request to add a dependent with a following data:

@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import utils.CommonMethods;
+import utils.DBReader;
 
 import java.util.List;
 import java.util.Map;
@@ -181,7 +182,7 @@ public class EditEmployeeSteps extends CommonMethods {
 
     @And("the data is presented in database")
     public void theDataIsPresentedInDatabase() {
-        List<Map<String, String>> data= DBUtils.fetch("select * from hs_hr_employees where employee_id="+empID+";");
+        List<Map<String, String>> data= DBReader.fetch("select * from hs_hr_employees where employee_id="+empID+";");
         for (Map<String, String> record : data) {
             Assert.assertEquals(empID,record.get("employee_id"));
             Assert.assertEquals(empFirstName,record.get("emp_firstname") );

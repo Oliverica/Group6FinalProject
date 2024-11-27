@@ -1,8 +1,7 @@
 Feature: Creating a new employee related scenarios
 
   Background:
-    When user enters username and password
-    And clicks on login button
+    When user logs in with valid credentials
     And user clicks on PIM option
     And user clicks on Add Employee button
 

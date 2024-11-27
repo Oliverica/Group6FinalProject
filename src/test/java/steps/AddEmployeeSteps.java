@@ -20,23 +20,6 @@ public class AddEmployeeSteps extends CommonMethods {
     public static String expectedMiddleName;
     public static String expectedLastName;
 
-
-    @When("user enters username and password")
-    public void user_enters_username_and_password() {
-        sendText(ConfigReader.read("userName"), loginPage.usernameField);
-        sendText(ConfigReader.read("password"), loginPage.passwordField);
-    }
-
-    @When("clicks on login button")
-    public void clicks_on_login_button() {
-        click(loginPage.loginButton);
-    }
-
-    @When("user clicks on PIM option")
-    public void user_clicks_on_pim_option() {
-        click(dashboardPage.pimMenuButton);
-    }
-
     @When("user clicks on Add Employee button")
     public void user_clicks_on_add_employee_button() {
         click(dashboardPage.addEmployeeButton);

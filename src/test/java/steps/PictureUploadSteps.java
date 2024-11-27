@@ -47,8 +47,8 @@ public class PictureUploadSteps extends CommonMethods {
         click(employeeProfilePage.uploadButton);
     }
 
-    @Then("error message {string} is displayed")
-    public void errorMessageIsDisplayed(String errorMessage) {
+    @Then("error message for saving photo {string} is displayed")
+    public void errorMessageForSavingPhotoIsDisplayed(String errorMessage) {
         String actualMessage = employeeProfilePage.errorMessage.getText().substring(0, 37);
         Assert.assertEquals(errorMessage, actualMessage);
     }
@@ -67,8 +67,8 @@ public class PictureUploadSteps extends CommonMethods {
         click(employeeProfilePage.uploadButton);
     }
 
-    @Then("error message {string} should be displayed")
-    public void errorMessageShouldBeDisplayed(String errorMessage) {
+    @Then("error message for saving photo {string} should be displayed")
+    public void errorMessageForSavingPhotoShouldBeDisplayed(String errorMessage) {
         String actualMessage = employeeProfilePage.errorMessage.getText().substring(0, 34);
         Assert.assertEquals(errorMessage, actualMessage);
     }
