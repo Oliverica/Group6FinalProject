@@ -7,7 +7,6 @@ Feature: API User Creation
     Then the status code for this is 201
     Then and confirmation message appears "User Created"
 
-
 @Duplicate @api
     Scenario Outline: Validate User Creation With Incorrect Or Missing Fields
   Given request is prepared with name "<name>", email "<email>" and password "<password>"
@@ -20,6 +19,4 @@ Feature: API User Creation
     | Adam | Stegargdfdsfmail.com  | Password123 | 400 |  Invalid Email  |
     | Adam | Stegar@gdfdsfmail.com |             | 400 |  Please fill all inputs |
     |      | Stegar@gdfdsfmail.com | Password123 | 400 | Please fill all inputs  |
-
-
 

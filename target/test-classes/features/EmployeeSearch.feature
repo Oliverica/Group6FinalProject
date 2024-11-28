@@ -1,8 +1,7 @@
 Feature: Search for employees by their name or employee ID
 
 Background:
-  When user enters username and password
-  And clicks on login button
+  When user logs in with valid credentials
   And user clicks on PIM option
   And user clicks on Employee List button
 

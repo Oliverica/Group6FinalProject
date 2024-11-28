@@ -1,8 +1,7 @@
 Feature: Change personal details
 
   Background:
-    When user enters username and password
-    And clicks on login button
+    When user logs in with valid credentials
     And user clicks on PIM option
     And user clicks on employee list option
     When user enters valid employee ID "42843534" in the ID field

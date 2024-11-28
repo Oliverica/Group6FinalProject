@@ -24,7 +24,6 @@ public class AddDependentSteps extends CommonMethods {
     @When("user clicks on login button")
     public void user_clicks_on_login_button() {
         click(loginPage.loginButton);
-
     }
 
     @Then("user is navigated to dashboard page")
@@ -39,7 +38,6 @@ public class AddDependentSteps extends CommonMethods {
         click(dashboardPage.employeeListButton);
         Assert.assertTrue("List option page is not displayed. ",
                 dashboardPage.employeeListButton.isDisplayed());
-
     }
 
     @When("the user searches for the employee {string} with ID {string}")
@@ -47,7 +45,6 @@ public class AddDependentSteps extends CommonMethods {
         sendText(name, addDependentPage.nameToSearch);
         sendText(empId, addDependentPage.empID);
         click(addDependentPage.searchEmployee);
-
     }
 
     @Then("user clicks search button")
@@ -136,7 +133,6 @@ public class AddDependentSteps extends CommonMethods {
         } else {
             throw new IllegalArgumentException("Button " + buttonName + "is not implemented.");
         }
-
     }
 
     @Then("the dependent {string} should be added successfully")
@@ -166,7 +162,6 @@ public class AddDependentSteps extends CommonMethods {
             selectFromDropDown(relationship, addDependentPage.selectRelationship);
         } else {
             System.out.println("Relationship is either empty or invalid");
-
         }
         click(addDependentPage.saveDependent);
     }
@@ -337,5 +332,4 @@ public class AddDependentSteps extends CommonMethods {
         Assert.assertTrue("Dependent was not removed from the list.", isRemoved);
         System.out.println("Dependent was successfully removed from the list.");
     }
-
 }

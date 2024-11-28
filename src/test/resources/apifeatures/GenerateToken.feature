@@ -24,7 +24,6 @@ Feature: Generate Authentication Token
     Then response status code is 400
     Then error message "Email or Password is incorrect." is displayed in response body
 
-
   @generateToken @errorMessage @api @validCredentials @passed
   Scenario: Generating token by providing valid credentials
     Given request to generate token with valid email "admin_access@google.com" and valid password "Password123" is prepared
