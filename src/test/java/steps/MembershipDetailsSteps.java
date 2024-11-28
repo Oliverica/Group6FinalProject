@@ -56,6 +56,12 @@ public class MembershipDetailsSteps extends CommonMethods {
     public void error_message_is_coming_up(String errorMS) {
        Assert.assertEquals(membershipPage.errorMs.getText(),errorMS);
     }
+    @Then("Success message is coming up {string} displayed and enabled")
+    public void success_message_is_coming_up(String success) {
+        Assert.assertTrue(membershipPage.successMes.isDisplayed() && membershipPage.successMes.isEnabled());
+        Assert.assertEquals(membershipPage.successMes.getText(),success);
+
+    }
 
 
 
