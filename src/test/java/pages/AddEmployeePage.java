@@ -66,6 +66,10 @@ import utils.CommonMethods;
         public WebElement passwordMismatchError;
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 90d58105cca89a780048b3defc6b3eb86782b71a
     public AddEmployeePage() {
 
         PageFactory.initElements(driver, this);

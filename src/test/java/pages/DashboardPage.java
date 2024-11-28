@@ -6,6 +6,12 @@ import org.openqa.selenium.support.PageFactory;
 import utils.CommonMethods;
 
 public class DashboardPage extends CommonMethods {
+    @FindBy(id="menu_pim_viewPimModule")
+    public WebElement btnPIM;
+
+
+
+
 
 
     @FindBy(id = "menu_pim_addEmployee")
@@ -25,4 +31,6 @@ public class DashboardPage extends CommonMethods {
 
     public DashboardPage(){
             PageFactory.initElements(driver,this);
+    }
+}
                 

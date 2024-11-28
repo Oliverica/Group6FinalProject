@@ -43,5 +43,15 @@ public class APIPayloadConstants {
         return object.toString();
 
     }
+<<<<<<< HEAD
+=======
+    public static String generateTokenPayload(String email, String password) {
+        JSONObject obj = new JSONObject();
+        obj.put("email", email);
+        obj.put("password", password);
+        return obj.toString();
+    }
+>>>>>>> 90d58105cca89a780048b3defc6b3eb86782b71a
 }
+
 

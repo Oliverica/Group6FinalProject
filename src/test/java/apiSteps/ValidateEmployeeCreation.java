@@ -94,7 +94,7 @@ public class ValidateEmployeeCreation {
         List<Map<String, String>> employeeDetailsList = dataTable.asMaps(String.class, String.class);
         Map<String, String> employeeDetails = employeeDetailsList.get(0);
 
-        String birthDate = employeeDetails.get("emp_gender");
+        String birthDate = employeeDetails.get("emp_birthday");
         APIConstants.request = given()
                 .header(APIConstants.HEADER_CONTENT_TYPE_KEY, APIConstants.HEADER_CONTENT_TYPE_VALUE)
                 .header(APIConstants.HEADER_AUTHORIZATION_KEY, APIConstants.token)
@@ -131,7 +131,7 @@ public class ValidateEmployeeCreation {
             io.cucumber.datatable.DataTable dataTable) {
         List<Map<String, String>> employeeDetailsList = dataTable.asMaps(String.class, String.class);
         Map<String, String> employeeDetails = employeeDetailsList.get(0);
-        String gender = employeeDetails.get("emp_gender");
+
         APIConstants.request = given()
                 .header(APIConstants.HEADER_CONTENT_TYPE_KEY, APIConstants.HEADER_CONTENT_TYPE_VALUE)
                 .header(APIConstants.HEADER_AUTHORIZATION_KEY, APIConstants.token)
