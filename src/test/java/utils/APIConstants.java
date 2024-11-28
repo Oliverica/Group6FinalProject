@@ -7,11 +7,11 @@ import io.restassured.specification.RequestSpecification;
 
 public class APIConstants {
 
+    public static  String token;
     public static final String baseURL = RestAssured.baseURI
             = "http://hrm.syntaxtechs.net/syntaxapi/api";
     public static Response response;
     public static RequestSpecification request;
-    public static String token;
 
     public static final String CREATE_EMPLOYEE=baseURL+"/createEmployee.php";
     public static final String GENERATE_TOKEN=baseURL+"/generateToken.php";

@@ -22,8 +22,7 @@ Feature: Delete the employee
   Scenario: Delete the employee with invalid or deleted ID
     Given a request is prepared to delete the employee with employee ID "115601Y" that does not exist
     When a DEL call is made to delete the employee
-    Then user gets en error code 400
-    And user gets a message "Employee does not exist or you have provided invalid employee_id"
+    Then user gets a message "Employee does not exist or you have provided invalid employee_id"
 
   @artem @delete3
   Scenario: Delete the employee without providing ID

@@ -6,16 +6,23 @@ public class APIPayloadConstants {
 
     public static String createUser(String name,
                                     String email,
-                                    String password){
+                                    String password) {
         if (email.equalsIgnoreCase("dynamic")) {
             email = "user" + System.currentTimeMillis() + "@Anything.com";
         }
-        JSONObject jsonObject=new JSONObject();
-        jsonObject.put("name",name);
-        jsonObject.put("email",email);
-        jsonObject.put("password",password.isEmpty()? null: password);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("name", name);
+        jsonObject.put("email", email);
+        jsonObject.put("password", password.isEmpty() ? null : password);
         return jsonObject.toString();
 
+    }
+
+    public static String generateTokenPayload(String email, String password) {
+        JSONObject obj = new JSONObject();
+        obj.put("email", email);
+        obj.put("password", password);
+        return obj.toString();
     }
 
     public static String createEmployeeJsonPayloadDynamic(String emp_firstname,
@@ -37,12 +44,7 @@ public class APIPayloadConstants {
         return object.toString();
 
     }
-    public static String generateTokenPayload(String email, String password) {
-        JSONObject obj = new JSONObject();
-        obj.put("email", email);
-        obj.put("password", password);
-        return obj.toString();
-    }
 }
+
 
 

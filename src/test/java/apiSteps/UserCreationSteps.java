@@ -42,6 +42,7 @@ public class UserCreationSteps {
     @Then("the status for this is {int}")
     public void the_status_for_this_is(Integer statusCode) {
         APIConstants.response.then().assertThat().statusCode(statusCode);
+
     }
 
     @Then("the error message appears {string}")
