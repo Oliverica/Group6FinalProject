@@ -12,7 +12,6 @@ public class APIConstants {
             = "http://hrm.syntaxtechs.net/syntaxapi/api";
     public static Response response;
     public static RequestSpecification request;
-    public static String token;
 
     public static final String CREATE_EMPLOYEE=baseURL+"/createEmployee.php";
     public static final String GENERATE_TOKEN=baseURL+"/generateToken.php";
