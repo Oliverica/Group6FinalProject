@@ -79,13 +79,19 @@ public class DeleteEmployee {
                 .then()
                 .extract()
                 .jsonPath()
-                .getString("massage");
+                .getString("Massage");
         assert actualMessage.equals(msg);
+        //full response to check
+        String jsonResponse = APIConstants.response
+                .then()
+                .extract()
+                .asString();
+        System.out.println("Full JSON Response: " + jsonResponse);
     }
 
     @Then("user gets en error code {int}")
     public void userGetsEnErrorCode(int statusCode) {
-        APIConstants.response.then().assertThat().statusCode(statusCode);
+       APIConstants.response.then().assertThat().statusCode(statusCode);
     }
 
     @Given("a request is prepared to delete the created employee without ID")
