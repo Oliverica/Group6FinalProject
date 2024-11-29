@@ -1,26 +1,45 @@
 Feature:
 
   Background:
-    When user enters valid credentials
-    And clicks login button
-    And user clicks PIM option
-    And user clicks employee list option
-    And user navigates to the employee profile by providing employee ids "42843534"
-    When user clicks on employee id and click membership button
-    And user clicks on Top Add button
+    Given employee logs in with valid username "JackJohn88" and password "Isabella_Carter@123!"
+    When employee clicks on My Info button
 
-  @CheckAndValidateFields @group6
-  Scenario: Check and validate required fields
-    Then user is navigated to MembershipAdd and fields are checked
+  @EditableAndDisplayed @Full
+  Scenario: Validate
+    When employee clicks on Membership button
+    And employee click on Add Top Button
+    Then employee can see all the required fields are displayed and editable
 
-  @MandatoryFieldsError @group6
-  Scenario:MandatoryFields
-    When users select all the required details "2223132", "2024-11-10""
-    And user press Save Bt
-    Then Error message is coming up "Required"
+  @CheckRequiredFields @Full
+  Scenario: Check The required Fields
+    When employee clicks on Membership button
+    And employee click on Add Top Button
+    When employee selects "Membership1" from dropdown
+    And employee selects paid by "Company"
+    And employee enters subscription amount "500"
+    And employee selects "Euro" from the currency dropdown menu
+    And empployee selects "2012-02-12" as commence date
+    And employee selects "2024-12-11" as renewal date
+    Then employee clicks on Save membership button
+    And message "Successfully Saved" is displayed
 
-  @SuccessMessage @group6
-  Scenario: Success Message
-    When users select all the required details "2223132", "2024-11-10""
-    And user press Save Bt
-    Then Success message is coming up "Successfully Saved" displayed and enabled
+  @EditAndCheck @Full
+  Scenario: Edit employee details and check
+    When employee clicks on Membership button
+    When employee click on membership "Membership1"
+    When employee selects "Elsayed Masoud" from dropdown
+    And employee selects paid by "Individual"
+    And employee enters subscription amount "300"
+    And employee selects "Albanian Lek" from the currency dropdown menu
+    And empployee selects "2010-02-22" as commence date
+    And employee selects "2010-12-11" as renewal date
+    Then employee clicks on Save membership button
+    And message "Successfully Saved" is displayed
+    Then all the saved details are checked "Elsayed Masoud","Individual","300.00","ALL","2010-02-22","2010-12-11"
+
+  @Delete @Full
+  Scenario:Delete the membership as an employee
+    When employee clicks on Membership button
+    When employee select "Membership1"
+    And employee clicks on Delete button
+    Then message for deleted membership "Successfully Deleted" is displayed

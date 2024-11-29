@@ -25,6 +25,8 @@ public class AddEmployeeSteps extends CommonMethods {
         click(dashboardPage.addEmployeeButton);
     }
 
+
+
     @When("user enters an employee full name")
     public void user_enters_an_employee_full_name() {
         try {

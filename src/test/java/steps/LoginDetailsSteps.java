@@ -20,22 +20,13 @@ public class LoginDetailsSteps extends CommonMethods {
     }
 
     @And("user navigates to the dashboard page")
-    public void user_navigates_to_the_dashboard_page() throws InterruptedException {
-
-        Assert.assertEquals("Welcome Admin",
-                dashboardPage.welcomeMessage.getText());
+    public void user_navigates_to_the_dashboard_page() {
+        Assert.assertTrue(dashboardPage.welcomeMessage.getText().contains("Welcome"));
         Assert.assertTrue(dashboardPage.welcomeMessage.isDisplayed());
-        Assert.assertTrue("Dashboard page is not displayed",
-                dashboardPage.welcomeMessage.isDisplayed());
-    }
-
-    @Then("user clicks on PIM option")
-    public void user_clicks_on_pim_option() {
-        click(dashboardPage.pimMenuButton);
     }
 
     @Then("user clicks on add employee option")
-    public void user_clicks_on_add_employee_option() throws InterruptedException {
+    public void user_clicks_on_add_employee_option() {
         click(addEmployeePage.addEmployee);
     }
 
@@ -65,14 +56,6 @@ public class LoginDetailsSteps extends CommonMethods {
         }
     }
 
-    @When("user fills mandatory fields {string},{string}, and {string} for First Name,Last Name, and Employee ID")
-    public void user_fills_mandatory_fields_and_for_first_name_last_name_and_employee_id(
-            String firstName, String lastName, String employeeID) {
-        sendText(firstName, addEmployeePage.firstNameField);
-        sendText(lastName, addEmployeePage.lastNameField);
-        sendText(employeeID, addEmployeePage.employeeIDField);
-    }
-
     @When("user selects the checkbox {string} in the Add Employee page")
     public void user_selects_the_checkbox_in_the_Add_Employee_page(String checkBoxName) {
         switch (checkBoxName) {
@@ -84,28 +67,6 @@ public class LoginDetailsSteps extends CommonMethods {
                 throw new RuntimeException("Invalid checkbox name:" + checkBoxName);
 
         }
-    }
-
-    @Then("there should be no error messages under password and confirm password fields")
-    public void there_should_be_no_error_messages_under_password_and_confirm_password_fields() {
-        try {
-            Assert.assertFalse("Error message is displayed under the password field",
-                    addEmployeePage.passwordError.isDisplayed());
-        }catch (NoSuchElementException e) {
-            System.out.println("No error message under field as expected");
-        }
-        try {
-            Assert.assertFalse("Error message is displayed under the confirm password field",
-                    addEmployeePage.confirmPasswordError.isDisplayed());
-        }catch (NoSuchElementException e) {
-            System.out.println("No error message under confirm password field as expected");
-        }
-    }
-    @Then("status dropdown should display {string}")
-    public void status_dropdown_should_display(String expectedStatus) {
-        String actualStatus=getSelectedOption(addEmployeePage.statusDropdown);
-        Assert.assertEquals("Status dropdown value is incorrect",
-                expectedStatus,actualStatus);
     }
 
     @Then("username, password fields, and status field are enabled")
@@ -120,11 +81,6 @@ public class LoginDetailsSteps extends CommonMethods {
                 addEmployeePage.statusDropdown.isEnabled());
     }
 
-    @When("user enters {string} as username")
-    public void user_enters_as_username(String username) {
-        sendText(username, addEmployeePage.usernameField);
-
-    }
 
     @When("user enters {string} as password")
     public void user_enters_as_password(String password) {
@@ -143,6 +99,28 @@ public class LoginDetailsSteps extends CommonMethods {
         selectFromDropDown(status, addEmployeePage.statusDropdown);
 
     }
+    @Then("there should be no error messages under password and confirm password fields")
+    public void there_should_be_no_error_messages_under_password_and_confirm_password_fields() {
+        try {
+            Assert.assertFalse("Error message is displayed under the password field",
+                    addEmployeePage.passwordError.isDisplayed());
+        }catch (NoSuchElementException e) {
+            System.out.println("No error message under field as expected");
+        }
+        try {
+            Assert.assertFalse("Error message is displayed under the confirm password field",
+                    addEmployeePage.confirmPasswordError.isDisplayed());
+        }catch (NoSuchElementException e) {
+            System.out.println("No error message under confirm password field as expected");
+        }
+    }
+    @Then("status dropdown should display {string}")
+    public void status_dropdown_should_display(String expectedStatus) {
+        String actualStatus=getSelectedOption(addEmployeePage.statusDropdown);
+
+        Assert.assertEquals("Status dropdown value is incorrect",
+                expectedStatus,actualStatus);
+    }
 
     @When("user clicks {string}")
     public void user_clicks(String buttonName) {
@@ -156,17 +134,13 @@ public class LoginDetailsSteps extends CommonMethods {
 
     }
 
-    @Then("user should be navigated to the {string} page")
-    public void user_should_be_navigated_to_the_page(String pageName) {
-        switch (pageName) {
-            case "Employee Profile":
-                System.out.println("Navigated to Employee Profile Page");
-                break;
-            default:
-                throw new RuntimeException("Invalid page name" + pageName);
-        }
+    @Then("user should be navigated to the Human Management System page")
+    public void userShouldBeNavigatedToTheHumanManagementSystemPage() {
+        String actualTitle=driver.getCurrentUrl();
+        Assert.assertNotEquals(actualTitle,"http://hrm.syntaxtechs.net/humanresources/symfony/web/index.php/pim/addEmployee");
 
     }
+
 
     @When("user fills mandatory fields {string} and {string} for First Name and Last Name")
     public void user_fills_mandatory_fields_and_for_first_name_and_last_name(
@@ -219,14 +193,39 @@ public class LoginDetailsSteps extends CommonMethods {
 
     }
 
-    @Then("error message {string} should be displayed")
-    public void error_message_should_be_displayed(String expectedMessage) {
+    @Then("error message {string} should be visible")
+    public void error_message_should_be_visible(String expectedMessage) {
         waitForVisibility(addEmployeePage.confirmPasswordError);
+
         String actualMessage = addEmployeePage.confirmPasswordError.getText();
         System.out.println("Actual error message: " + actualMessage);
         Assert.assertEquals("Error message is incorrect", expectedMessage, actualMessage);
+
     }
 
 
-}
+    @When("user logins with valid credentials as {string} and {string}")
+    public void userLoginsWithValidCredentialsAsAnd(String userName, String password) {
+        sendText(userName, loginPage.usernameField);
+        sendText(password, loginPage.passwordField);
+        click(loginPage.loginButton);
+    }
 
+    @When("user fills mandatory fields {string},{string} for First Name,Last Name, and Employee ID")
+    public void userFillsMandatoryFieldsForFirstNameLastNameAndEmployeeID(String firstName, String lastName) {
+        sendText(firstName, addEmployeePage.firstNameField);
+        sendText(lastName, addEmployeePage.lastNameField);
+    }
+
+    @When("username is generated based on ID")
+    public void usernameIsGeneratedBasedOnID() {
+        String username="user"+addEmployeePage.employeeIDField.getAttribute("value");
+        sendText(username, addEmployeePage.usernameField);
+        System.out.println(username);
+    }
+
+    @Then("user clicks on PIM option")
+    public void userClicksOnPIMOption() {
+        click(dashboardPage.pimMenuButton);
+    }
+}

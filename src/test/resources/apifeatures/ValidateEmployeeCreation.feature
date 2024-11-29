@@ -6,7 +6,7 @@ Feature: Validate Employee Creation API
     Given request to generate token with valid email "oliverica333@gmail.com" and valid password "Nikolina..456" is prepared
     And POST request to generate token is called
 
-  @employeeCreation
+  @employeeCreation @api
   Scenario: Validate successful employee creation with valid data
     Given  a valid payload is prepared with following details:
       |emp_firstname|emp_lastname|emp_middle_name|emp_gender|emp_birthday|emp_status|emp_job_title|
@@ -15,7 +15,7 @@ Feature: Validate Employee Creation API
     Then the status code should be 201
     And  the response message should be "Employee Created"
 
-  @invalidGender
+  @invalidGender @api
   Scenario: Validate API with invalid gender
     Given a payload is prepared with employee details and invalid gender "X"
       |emp_firstname|emp_lastname|emp_middle_name|emp_gender|emp_birthday|emp_status|emp_job_title|
@@ -24,7 +24,7 @@ Feature: Validate Employee Creation API
     Then the status code should be 400
     And the error message should be "enter M for male enter F for female"
 
-  @invalidDoBformat
+  @invalidDoBformat @api
   Scenario: Validate API with invalid birth date format
     Given a payload is prepared with employee details and invalid birthday format:
       |emp_firstname|emp_lastname|emp_middle_name|emp_gender|emp_birthday|emp_status|emp_job_title|
@@ -34,7 +34,7 @@ Feature: Validate Employee Creation API
     And the error message should be displayed
 
 
-  @missingFields
+  @missingFields @api
   Scenario: Validate missing fields in payload
     Given a payload is prepared with employee details and missing fields
       |emp_firstname|emp_lastname|emp_middle_name|emp_gender|emp_birthday|emp_status|emp_job_title|
@@ -43,7 +43,7 @@ Feature: Validate Employee Creation API
     Then the status code should be 400
     Then the response should indicate that the payload is incomplete
 
-  @invalidStatus
+  @invalidStatus @api
   Scenario: Validate API with invalid status
     Given a payload is prepared with employee details and invalid status
       |emp_firstname|emp_lastname|emp_middle_name|emp_gender|emp_birthday|emp_status|emp_job_title|

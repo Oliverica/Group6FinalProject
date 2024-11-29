@@ -1,13 +1,13 @@
 Feature: API User Creation
 
-  @UserCreation @api
+  @UserCreation @api @1
   Scenario: Valid User Creation
     Given request is prepared by providing name "Adam", email "dynamic" and password "Password123"
     When Post call is made
     Then the status code for this is 201
     Then and confirmation message appears "User Created"
 
-@Duplicate @api
+@Duplicate @api @1
     Scenario Outline: Validate User Creation With Incorrect Or Missing Fields
   Given request is prepared with name "<name>", email "<email>" and password "<password>"
   When Post call is made

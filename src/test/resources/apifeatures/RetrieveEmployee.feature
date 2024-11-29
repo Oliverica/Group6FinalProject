@@ -4,7 +4,7 @@ Feature: Get the created employee
     Given request to generate token with valid email "admin_access@google.com" and valid password "Password123" is prepared
     And POST request to generate token is called
 
-@api @artem @valid
+  @api @artem @valid
 Scenario: Get the created employee by valid ID
   Given a request is prepared to get the created the employee by valid ID "115714A"
   When a GET call is made to get the employee

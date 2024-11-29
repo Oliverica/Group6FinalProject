@@ -22,8 +22,8 @@ public class PageInitializer {
         dashboardPage = new DashboardPage();
         addDependentPage = new AddDependentPage();
         employeeProfilePage = new EmployeeProfilePage();
-        jobDetailsPage=new JobDetailsPage();
-        membershipPage=new MembershipPage();
+        jobDetailsPage = new JobDetailsPage();
+        membershipPage = new MembershipPage();
         editEmployeePage = new EditEmployeePage();
         myInfoPage = new MyInfoPage();
     }

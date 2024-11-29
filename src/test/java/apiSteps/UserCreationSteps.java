@@ -19,7 +19,7 @@ public class UserCreationSteps {
 
     @When("Post call is made")
     public void post_call_is_made() {
-        APIConstants.response = APIConstants.request.when().post(APIConstants.CREATE_EMPLOYEE);
+        APIConstants.response = APIConstants.request.when().post(APIConstants.CREATE_USER);
     }
 
     @Then("the status code for this is {int}")
@@ -36,6 +36,7 @@ public class UserCreationSteps {
     @Given("request is prepared with name {string}, email {string} and password {string}")
     public void request_is_prepared_with_name_email_and_password(String name, String email, String password) {
         APIConstants.request = given().
+                header(APIConstants.HEADER_CONTENT_TYPE_KEY, APIConstants.HEADER_CONTENT_TYPE_VALUE).
                 body(APIPayloadConstants.createUser(name, email, password));
     }
 
