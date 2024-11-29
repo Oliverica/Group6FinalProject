@@ -8,24 +8,6 @@ import utils.CommonMethods;
 
     public class AddEmployeePage extends CommonMethods {
 
-        @FindBy(xpath = "//span[@id='user_password_help_text' and @class='validation-error']")
-        public WebElement passwordError;
-
-        @FindBy(xpath = "//input[@class='formInputText valid']")
-        public WebElement dependent_Name;
-
-        @FindBy(xpath = "//h1[@id='heading']")
-        public WebElement editDependent;
-
-        @FindBy(xpath = ".//td[@class='check']/input[@type='checkbox']")
-        public WebElement dependentCheckbox;
-
-        @FindBy(xpath = ".//td[@class='dependentName']/a")
-        public WebElement dependent_name;
-
-        @FindBy(xpath = "//span[@for='re_password' and contains(text(),'Passwords do not match')]")
-        public WebElement confirmPasswordError;
-
         @FindBy(id = "firstName")
         public WebElement firstNameField;
 
@@ -83,7 +65,17 @@ import utils.CommonMethods;
         @FindBy(xpath = "//span[text()='Passwords do not match']")
         public WebElement passwordMismatchError;
 
+        @FindBy(xpath = "//span[@id='user_password_help_text' and @class='validation-error']")
+        public WebElement passwordError;
+
+        @FindBy(xpath = "//span[@for='re_password' and contains(text(),'Passwords do not match')]")
+        public WebElement confirmPasswordError;
+
+
+
     public AddEmployeePage() {
         PageFactory.initElements(driver, this);
+
+
     }
 }

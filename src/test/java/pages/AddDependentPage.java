@@ -19,6 +19,7 @@ public class AddDependentPage extends CommonMethods {
     @FindBy(xpath = "//select[@id='dependent_relationshipType']/option[@value='child']")
     public WebElement childOption;
 
+
     @FindBy(id = "dependent_name")
     public WebElement dependentName;
 
@@ -49,8 +50,9 @@ public class AddDependentPage extends CommonMethods {
     @FindBy(xpath = "//select[@class='ui-datepicker-year']")
     public WebElement yearDropdown;
 
-    @FindBy(xpath = "//table[@class='ui-datepicker-calendar']/tbody/tr")
+    @FindBy(xpath = "//table[@class='ui-datepicker-calendar']/tbody/tr/td")
     public List<WebElement> dayDropdown;
+
 
     @FindBy(id = "empsearch_employee_name_empName")
     public WebElement nameToSearch;
@@ -85,24 +87,23 @@ public class AddDependentPage extends CommonMethods {
     @FindBy(xpath = "//td[@class='dependentName']/a[text()='ama']")
     public WebElement dependentLink;
 
+
     @FindBy(xpath = "//form[@id='frmEmpDelDependents']")
     public WebElement assignedDependentsTable;
 
+    @FindBy (xpath = "//div[@class='message success fadable']")
+    public WebElement successMsg;
+
+
     @FindBy(xpath = "//table[@id='dependent_list']/tbody/tr/td[2]")
-    public WebElement dependentsNames;
-
-    @FindBy(xpath = "//table[@id='dependent_list']/tbody/tr")
     public List<WebElement> dependentRows;
-
     public List<WebElement> getDependentsRows(){
         return dependentRows;
     }
 
-    @FindBy(xpath = "//table[@id='dependent_list']/tbody/tr/td[1]")
-    public WebElement dependentCheckbox;
 
-    @FindBy(xpath = "//div[@class='message success fadable']")
-    public WebElement savedMessage;
+
+
 
     public AddDependentPage() {
         PageFactory.initElements(driver, this);

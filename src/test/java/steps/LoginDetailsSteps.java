@@ -223,9 +223,6 @@ public class LoginDetailsSteps extends CommonMethods {
         sendText(username, addEmployeePage.usernameField);
         System.out.println(username);
     }
-
-    @Then("user clicks on PIM option")
-    public void userClicksOnPIMOption() {
-        click(dashboardPage.pimMenuButton);
-    }
 }
+
+

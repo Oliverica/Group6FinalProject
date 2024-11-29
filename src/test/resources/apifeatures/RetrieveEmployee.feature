@@ -2,7 +2,9 @@ Feature: Get the created employee
 
   Background:
     Given request to generate token with valid email "admin_access@google.com" and valid password "Password123" is prepared
-    And POST request to generate token is called
+    When POST request to generate token is called
+    Then response status code is 200
+    Then token has to match JWT format
 
   @api @artem @valid
 Scenario: Get the created employee by valid ID
