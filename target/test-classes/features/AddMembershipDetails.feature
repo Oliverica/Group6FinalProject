@@ -19,6 +19,10 @@ Feature:
       And user press Save Bt
       Then Error message is coming up "Required"
 
-
+  @SuccessMessage
+  Scenario: Success Message
+    When users select all the required details "2223132", "2024-11-10""
+    And user press Save Bt
+    Then Success message is coming up "Successfully Saved" displayed and enabled
 
 

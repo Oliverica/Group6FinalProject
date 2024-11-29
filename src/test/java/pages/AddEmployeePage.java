@@ -65,6 +65,12 @@ import utils.CommonMethods;
         @FindBy(xpath = "//span[text()='Passwords do not match']")
         public WebElement passwordMismatchError;
 
+        @FindBy(xpath = "//span[@id='user_password_help_text' and @class='validation-error']")
+        public WebElement passwordError;
+
+        @FindBy(xpath = "//span[@for='re_password' and contains(text(),'Passwords do not match')]")
+        public WebElement confirmPasswordError;
+
 
 
     public AddEmployeePage() {
