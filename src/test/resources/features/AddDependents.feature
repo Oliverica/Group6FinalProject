@@ -12,11 +12,11 @@ Feature: Add Dependents to Employee Profile
     Then the user selects the employee
     And the user is on the Personal Details Page
     Then the user clicks on Dependent tab
-    And the user clicks on Add button to add dependent
 
 
-  @getTheUser
+  @getTheUser @Olivera
   Scenario Outline: Add a dependent with a valid data
+    And the user clicks on Add button to add dependent
     When the user enters dependent name as "<name>"
     And the user selects relationship as "<relationship>"
     And the user selects date of birth as "<dateOfBirth>"
@@ -25,11 +25,12 @@ Feature: Add Dependents to Employee Profile
     Examples:
       |name          |relationship|dateOfBirth|
       |Michael Lee   |Child       |2000-01-11 |
-      |Michael Jordan|Parent      |1960-09-11 |
+      |Michael Jordan|Parent     |1960-09-11 |
 
 
-  @missingOrInvalidFields
+  @missingOrInvalidFields @Olivera
   Scenario Outline: Add a dependent with with missing or invalid fields
+    And the user clicks on Add button to add dependent
     When the user sends a request to add a dependent with a following data: a dependent with "<name>",and "<relationship>"
     Then the response should return "<expectedMessage>"
     Examples:
@@ -37,7 +38,8 @@ Feature: Add Dependents to Employee Profile
       |Mike          |             |Required        |
       |Michael Lee   |Child        |Required        |
       |              |Parent       |Required        |
-  @addMultiple
+
+  @addMultiple @Olivera
   Scenario: Add multiple dependents for an employee
     When the user sends a request to add a dependent with a following data:
       |name          |relationship|dateOfBirth|
@@ -45,7 +47,7 @@ Feature: Add Dependents to Employee Profile
       |Michael Lee   |Child       |2000-01-11 |
     Then the response should confirm all dependents were added successfully
 
-  @edit
+  @edit @Olivera
   Scenario Outline: Display dependents in the HRMS system and make sure they are editable
     When the user views  the dependent list for an employee
     Then the dependent list should display all added dependents
@@ -54,11 +56,14 @@ Feature: Add Dependents to Employee Profile
     Then the dependent information should be updated successfully
     Examples:
       |currentName|newName|
-      |ama        |lama   |
+      |Michael Lee|Michael Musk |
 
-  @delete
-  Scenario: Verify successful deletion
+  @delete @Olivera
+  Scenario Outline: Verify successful deletion
     When the user clicks on Dependents tab
-    And the user selects a dependent to delete
+    And the user selects a dependent to delete "<newName>"
     And the user clicks on the "Delete" button
     Then the dependent should be removed from the list
+    Examples:
+      |newName|
+      |Jack Miller|

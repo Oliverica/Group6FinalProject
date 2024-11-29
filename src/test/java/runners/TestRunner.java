@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 
         glue = "steps",
         dryRun = false,
-        tags = " @login",
+        tags = " @Olivera",
         plugin = {"pretty","html:target/cucumber.html","json:target/cucumber.json",
                 "rerun:target/failed.txt"}
 )

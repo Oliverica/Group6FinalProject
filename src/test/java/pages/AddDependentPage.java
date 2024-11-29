@@ -91,7 +91,11 @@ public class AddDependentPage extends CommonMethods {
     @FindBy(xpath = "//form[@id='frmEmpDelDependents']")
     public WebElement assignedDependentsTable;
 
-    @FindBy(xpath = "//table[@id='dependent_list']/tbody/tr")
+    @FindBy (xpath = "//div[@class='message success fadable']")
+    public WebElement successMsg;
+
+
+    @FindBy(xpath = "//table[@id='dependent_list']/tbody/tr/td[2]")
     public List<WebElement> dependentRows;
     public List<WebElement> getDependentsRows(){
         return dependentRows;
