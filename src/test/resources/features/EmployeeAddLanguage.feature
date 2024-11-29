@@ -6,7 +6,7 @@ Feature: Add language proficiency details on the employee profile
     Then employee is navigated to the employee profile "Jack John Beans"
     And employee clicks on Qualifications button
 
-  @addLanguage @validationError @passed
+  @addLanguage @validationError @passed @group6
   Scenario: Validating error
     When employee clicks on Add language button
     Then dropdown field is displayed and editable
@@ -18,7 +18,7 @@ Feature: Add language proficiency details on the employee profile
     And employee clicks on Save button
     Then validation error "Required" is displayed
 
-  @addLanguage @validateDropDown @validateMandatoryFields @failed
+  @addLanguage @validateDropDown @validateMandatoryFields @failed @group6
     Scenario: Validate dropdown of the mandatory fields
     Given employee clicks on Add language button
     When employee clicks on Select language button

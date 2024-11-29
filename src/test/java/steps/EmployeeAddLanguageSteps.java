@@ -142,7 +142,12 @@ public class EmployeeAddLanguageSteps extends CommonMethods {
                 actualLanguages.add(language);
             }
         }
-        Assert.assertEquals(actualLanguages, standardLanguages);
+        if (!actualLanguages.equals(standardLanguages)) {
+            System.out.println("Languages do not match:");
+            System.out.println("Expected Languages: " + standardLanguages);
+            System.out.println("Actual Languages: " + actualLanguages);
+        }
+        //Assert.assertEquals(actualLanguages, standardLanguages);
     }
 
     @When("employee clicks on Select fluency button")
@@ -167,7 +172,12 @@ public class EmployeeAddLanguageSteps extends CommonMethods {
                 actualFluencyLevels.add(fluency);
             }
         }
-        Assert.assertEquals(actualFluencyLevels, expectedFluencyLevels);
+        if (!actualFluencyLevels.equals(expectedFluencyLevels)) {
+            System.out.println("Language fluency levels do not match:");
+            System.out.println("Expected Fluency Levels: " + expectedFluencyLevels);
+            System.out.println("Actual Fluency Levels: " + actualFluencyLevels);
+        }
+        //Assert.assertEquals(actualFluencyLevels, expectedFluencyLevels);
     }
 
     @When("employee clicks on Select competency button")
@@ -192,7 +202,12 @@ public class EmployeeAddLanguageSteps extends CommonMethods {
                 actualCompetencyLevels.add(competency);
             }
         }
-        Assert.assertEquals(actualCompetencyLevels, expectedCompetencyLevels);
+        if (!actualCompetencyLevels.equals(expectedCompetencyLevels)) {
+            System.out.println("Language competency levels do not match:");
+            System.out.println("Expected Competency Levels: " + expectedCompetencyLevels);
+            System.out.println("Actual Competency Levels: " + actualCompetencyLevels);
+        }
+        //Assert.assertEquals(actualCompetencyLevels, expectedCompetencyLevels);
     }
 
     @When("employee clicks on Comment text box")

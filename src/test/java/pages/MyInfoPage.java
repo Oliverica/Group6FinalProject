@@ -55,7 +55,7 @@ public class MyInfoPage extends CommonMethods {
     @FindBy(xpath = "//input[@value='Edit']")
     public WebElement editContactDetailsButton;
 
-    @FindBy (id = "btnSave")
+    @FindBy(id = "btnSave")
     public WebElement saveContactDetailsButton;
 
     @FindBy(xpath = "//label[@for='contact_street1']")

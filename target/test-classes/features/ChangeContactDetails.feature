@@ -7,12 +7,12 @@ Feature: Changing contact details as an employee
     And employee clicks on Contact Details button
     And employee clicks on Edit contact details button
 
-  @changeContactDetails @validateContactDetailsFields @failed
+  @changeContactDetails @validateContactDetailsFields @failed @group6
   Scenario: Validate fields on the contact information page
     Then following fields are displayed: "Address Street 1", "Address Street 1", "City", "State", "Zip Code", "Country", "Home Phone", "Mobile Phone", "Work Phone", "Work Email", "Other Email"
     And textboxes and dropdown are displayed and editable
 
-  @changeContactDetails @invalidContactDetails @passed
+  @changeContactDetails @invalidContactDetails @passed @group6
   Scenario: Update the contact details with invalid details
     When employee updates the following fields with invalid data type
       | Home Telephone | Mobile          | Work Telephone | Work Email   | Other Email   |
@@ -24,7 +24,7 @@ Feature: Changing contact details as an employee
     And Error message "Expected format: admin@example.com" is displayed next to the Work Email textbox
     And Error message "Expected format: admin@example.com" is displayed next to the Other Email textbox
 
-  @changeContactDetails @validContactDetails @passed
+  @changeContactDetails @validContactDetails @passed @group6
   Scenario: Update the contact details with valid details
     When employee corrects the following fields with valid details
       | Address Street 1 | Address Street 2 | City       | State/Province | Zip/Postal Code | Country       | Home Telephone | Mobile         | Work Telephone | Work Email             | Other Email          |

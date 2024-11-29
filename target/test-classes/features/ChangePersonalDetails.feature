@@ -8,7 +8,7 @@ Feature: Change personal details
     When user clicks Search button
     Then user is able to see the unique employee
 
-    @edit @artem
+    @edit @artem @group6
     Scenario: Edit personal details
       When user clicks on unique employee
       Then the new page with user profile is opened

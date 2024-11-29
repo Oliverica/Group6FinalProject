@@ -9,17 +9,17 @@ Feature:
     When user clicks on employee id and click membership button
     And user clicks on Top Add button
 
-  @CheckAndValidateFields
+  @CheckAndValidateFields @group6
   Scenario: Check and validate required fields
     Then user is navigated to MembershipAdd and fields are checked
 
-  @MandatoryFieldsError
+  @MandatoryFieldsError @group6
   Scenario:MandatoryFields
     When users select all the required details "2223132", "2024-11-10""
     And user press Save Bt
     Then Error message is coming up "Required"
 
-  @SuccessMessage
+  @SuccessMessage @group6
   Scenario: Success Message
     When users select all the required details "2223132", "2024-11-10""
     And user press Save Bt

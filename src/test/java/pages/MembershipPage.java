@@ -39,7 +39,7 @@ public class MembershipPage extends CommonMethods {
     @FindBy(xpath = "//body/div/div[3]/div[1]/div[2]/div[2]/form/fieldset/ol/li/span")
     public WebElement errorMs;
 
-    @FindBy(xpath = "//body/div/div[3]/div/div[3]/div[2]/div")
+    @FindBy(xpath = "//div[@class='message success fadable']")
     public WebElement successMes;
 
     public MembershipPage() {

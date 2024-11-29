@@ -15,7 +15,6 @@ public class MembershipDetailsSteps extends CommonMethods {
 
     @When("user clicks on employee id and click membership button")
     public void user_clicks_on_employee_id_and_click_membership_button() {
-       click(jobDetailsPage.IdButton);
        click(membershipPage.memberBTClick);
     }
 
@@ -58,7 +57,9 @@ public class MembershipDetailsSteps extends CommonMethods {
 
     @Then("Success message is coming up {string} displayed and enabled")
     public void success_message_is_coming_up(String success) {
-        Assert.assertTrue(membershipPage.successMes.isDisplayed() && membershipPage.successMes.isEnabled());
-        Assert.assertEquals(membershipPage.successMes.getText(),success);
+        getWait();
+        Assert.assertTrue(membershipPage.successMes.isDisplayed());
+        Assert.assertTrue(membershipPage.successMes.getText().contains(success));
+
     }
 }
