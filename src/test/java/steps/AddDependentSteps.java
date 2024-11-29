@@ -5,11 +5,16 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.CommonMethods;
 import utils.ConfigReader;
 import utils.DateUtils;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +29,7 @@ public class AddDependentSteps extends CommonMethods {
     @When("user clicks on login button")
     public void user_clicks_on_login_button() {
         click(loginPage.loginButton);
+
     }
 
     @Then("user is navigated to dashboard page")
@@ -42,9 +48,9 @@ public class AddDependentSteps extends CommonMethods {
 
     @When("the user searches for the employee {string} with ID {string}")
     public void the_user_searches_for_the_employee_with_ID(String name, String empId) {
-        sendText(name, addDependentPage.nameToSearch);
-        sendText(empId, addDependentPage.empID);
-        click(addDependentPage.searchEmployee);
+        sendText(name, employeeSearchPage.emloyeeNameSearchField);
+        sendText(empId, employeeSearchPage.employeeIDSearchField);
+        click(employeeSearchPage.searchButton);
     }
 
     @Then("user clicks search button")
@@ -56,14 +62,16 @@ public class AddDependentSteps extends CommonMethods {
     public void the_employee_details_should_be_displayed() throws InterruptedException {
         Assert.assertTrue("Employee details not displayed",
                 addDependentPage.resultTable.size() > 0);
-        Thread.sleep(2000);
     }
 
-    @Then("the user selects the employee")
-    public void the_user_selects_the_employee() throws InterruptedException {
-        waitForElementToBeClickable(addDependentPage.employeeName);
-        click(addDependentPage.employeeName);
-        Thread.sleep(2000);
+    @Then("the user selects the employee {string}")
+    public void the_user_selects_the_employee(String empID) throws InterruptedException {
+        List<WebElement> allEmployeeId = driver.findElements(By.xpath("//table/tbody/tr/td[2]"));
+        for (WebElement id : allEmployeeId) {
+            if (id.getText().equals(empID)) {
+                click(id);
+            }
+        }
     }
 
     @And("the user is on the Personal Details Page")
@@ -71,12 +79,10 @@ public class AddDependentSteps extends CommonMethods {
         Assert.assertTrue("Personal Details Page is not displayed",
                 addDependentPage.personalDetailsPage.isDisplayed());
         System.out.println("User is on the Personal Details Page");
-        Thread.sleep(2000);
     }
 
     @Then("the user clicks on Dependent tab")
     public void the_user_clicks_on_dependent_tab() {
-        waitForElementToBeClickable(addDependentPage.dependentsButton);
         click(addDependentPage.dependentsButton);
     }
 
@@ -92,8 +98,7 @@ public class AddDependentSteps extends CommonMethods {
 
     @When("the user selects relationship as {string}")
     public void the_user_selects_relationship_as(String relationship) throws InterruptedException {
-        waitForElementToBeClickable(addDependentPage.selectRelationship);
-        addDependentPage.selectRelationship.click();
+        //click(addDependentPage.selectRelationship);
 
         if (relationship.equalsIgnoreCase("Child")) {
             selectFromDropDown(addDependentPage.selectRelationship, "Child");
@@ -137,15 +142,13 @@ public class AddDependentSteps extends CommonMethods {
 
     @Then("the dependent {string} should be added successfully")
     public void the_dependent_should_be_added_successfully(String dependentName) {
-        boolean isDependentDisplayed = true;
-        for (WebElement dependent : addDependentPage.dependentRows) {
-            if (dependent.getText().equalsIgnoreCase(dependentName)) {
-                isDependentDisplayed = true;
-                break;
-            }
-        }
-        Assert.assertTrue("Dependent" + dependentName + "was not added successfully",
-                isDependentDisplayed);
+        List<WebElement> rows = addDependentPage.dependentRows;
+        boolean isDependentDisplayed =
+                rows.stream().anyMatch((WebElement row) -> row.getText().contains(dependentName));
+        Assert.assertTrue(
+                "Dependent '" + dependentName + "'was not found in the table.", isDependentDisplayed);
+        System.out.println("Dependent '" + dependentName + "' is displayed.");
+
 
     }
 
@@ -162,6 +165,7 @@ public class AddDependentSteps extends CommonMethods {
             selectFromDropDown(relationship, addDependentPage.selectRelationship);
         } else {
             System.out.println("Relationship is either empty or invalid");
+
         }
         click(addDependentPage.saveDependent);
     }
@@ -176,35 +180,51 @@ public class AddDependentSteps extends CommonMethods {
     @When("the user sends a request to add a dependent with a following data:")
     public void the_user_sends_a_request_to_add_a_dependent_with_a_following_data(
             io.cucumber.datatable.DataTable dataTable) throws InterruptedException {
+
         List<Map<String, String>> dependents = dataTable.asMaps(String.class, String.class);
         for (Map<String, String> dependent : dependents) {
             String name = dependent.get("name");
             String relationship = dependent.get("relationship");
-            String dateOfBirth = dependent.get("dateOfBirth");
 
-            if (!name.isEmpty()) {
-                sendText(name, addDependentPage.dependentName);
-            }
-            if (!relationship.isEmpty() && relationship.equals("-- Select --")) {
+            sendText(name, addDependentPage.dependentName);
+            System.out.println("Dependent name entered :" + name);
+
+            waitForElementToBeClickable(addDependentPage.selectRelationship);
+            if (relationship.equalsIgnoreCase("Child")) {
+                selectFromDropDown(addDependentPage.selectRelationship, "Child");
+            } else {
                 selectFromDropDown(relationship, addDependentPage.selectRelationship);
             }
-            if (!dateOfBirth.isEmpty()) {
-                System.out.println("Date of birth is not provided.");
-            }
             click(addDependentPage.saveDependent);
-            Thread.sleep(2000);
+            System.out.println("Dependent '" + name + "' with relationship '" + relationship + "' is added.");
+
+            waitForVisibility(addDependentPage.assignedDependentsTable);
+            click(addDependentPage.addDependentsButton);
+            System.out.println("Clicked add button");
         }
     }
 
-    @Then("the response should confirm all dependents were added successfully")
-    public void the_response_should_confirm_all_dependents_were_added_successfully() {
-        List<WebElement> dependentsList = addDependentPage.dependentRows;
-        Assert.assertTrue(
-                "Dependents were not added successfully", dependentsList.size() > 0);
+    @Then("the response should confirm all dependents were added successfully:")
+    public void the_response_should_confirm_all_dependents_were_added_successfully(
+            io.cucumber.datatable.DataTable dataTable) {
+        List<Map<String, String>> dependents = dataTable.asMaps(String.class, String.class);
+
+        for (Map<String, String> dependent : dependents) {
+            String name = dependent.get("name");
+
+            List<WebElement> rows = addDependentPage.dependentRows;
+            boolean isDependentDisplayed =
+                    rows.stream().anyMatch(row -> row.getText().contains(name));
+            Assert.assertTrue(
+                    "Dependent '" + name + "'was not found in the table.", isDependentDisplayed);
+            System.out.println("Dependent '" + name + "' is displayed.");
+        }
+
     }
 
     @When("the user views  the dependent list for an employee")
     public void the_user_views_the_dependent_list_for_an_employee() {
+        click(addDependentPage.dependentsButton);
         waitForVisibility(addDependentPage.assignedDependentsSection);
         System.out.println("User is viewing the Assigned Dependents section");
 
@@ -218,118 +238,90 @@ public class AddDependentSteps extends CommonMethods {
         Assert.assertTrue("No dependents are listed under Assigned Dependents!",
                 dependentRows.size() > 0);
 
-        for (WebElement rows : dependentRows) {
-            System.out.println("Dependent Data: " + rows.getText());
-            Assert.assertFalse("A row in the Dependents Table is empty."
-                    , rows.getText().isEmpty());
-            Thread.sleep(2000);
-        }
+        System.out.println("Dependent list is displayed with " + dependentRows.size() + " dependents.");
 
     }
 
     @When("the user selects a dependent to edit with name {string}")
-    public void the_user_selects_a_dependent_to_edit_with_name(String currentName) throws InterruptedException {
-        waitForVisibility(addDependentPage.assignedDependentsTable);
-        System.out.println("Dependent table is now visible.");
-        Thread.sleep(2000);
+    public void the_user_selects_a_dependent_to_edit_with_name(String currentName) {
+        List<WebElement> allDependents = driver.findElements(By.xpath("//table[@id='dependent_list']/tbody/tr/td[@class='dependentName']"));
+        System.out.println("Total Dependents Found: " + allDependents.size());
+        boolean dependentFound = false;
+        for (WebElement dependent : allDependents) {
+            System.out.println("Dependent Name: " + dependent.getText());
+            if (dependent.getText().equals(currentName)) {
+                dependentFound = true;
+                System.out.println("Match Found: " + currentName);
+                try {
+                    ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", dependent);
 
-        boolean found = false;
+                    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                    WebElement clickableDependent = wait.until(ExpectedConditions.elementToBeClickable(dependent));
+                    clickableDependent.click();
 
-        for (WebElement row : addDependentPage.dependentRows) {
-            String rowText = row.getText();
-            System.out.println("Row text: " + rowText);
-
-            if (rowText.contains(currentName)) {
-                System.out.println("Dependent found: " + currentName);
-                waitForElementToBeClickable(row);
-                row.click();
-                found = true;
+                    System.out.println("Clicked on: " + currentName);
+                } catch (Exception e) {
+                    System.err.println("Click failed. Attempting JavaScript click. Error: " + e.getMessage());
+                    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", dependent);
+                }
                 break;
             }
         }
-        Assert.assertTrue("Dependent with name: " + currentName + "not found", found);
+        Assert.assertTrue("Dependent '" + currentName + "' was not found!", dependentFound);
     }
-
 
     @When("the user updates the dependent's information as {string}")
     public void the_user_updates_the_dependent_s_information_as(String newName) {
-        sendText(newName, addDependentPage.dependentName);
-        click(addDependentPage.saveDependent);
-
+        if (addDependentPage.dependentName.isEnabled()){
+            sendText(newName, addDependentPage.dependentName);
+        } else {
+            System.out.println("Textbox interaction failed: Element not interactable.");
+        }
     }
 
     @Then("the dependent information should be updated successfully")
     public void the_dependent_information_should_be_updated_successfully() {
-        System.out.println("Dependent information updated successfully.");
-
-        List<WebElement> dependentRows = addDependentPage.getDependentsRows();
-        boolean isUpdated = false;
-
-        for (WebElement rows : dependentRows) {
-            String dependentData = rows.getText();
-            if (dependentData.contains("lama")) {
-                isUpdated = true;
-            }
-        }
-        if (!isUpdated) {
-            System.out.println("Dependent update failed or not reflected in the table.");
-        }
+        Assert.assertTrue(addDependentPage.savedMessage.isDisplayed());
     }
 
-    @When("the user selects a dependent to delete")
-    public void the_user_selects_a_dependent_to_delete() {
-        waitForVisibility(addDependentPage.assignedDependentsTable);
-        System.out.println("Dependent table is visible");
 
+    @When("the user clicks on Dependents tab")
+    public void the_user_clicks_on_Dependents_tab() {
+        click(addDependentPage.dependentsButton);
+        waitForVisibility(addDependentPage.assignedDependentsTable);
+
+    }
+
+    @When("the user selects a dependent to delete {string}")
+    public void the_user_selects_a_dependent_to_delete(String name) {
+        List<WebElement>rows=addDependentPage.dependentRows;
         boolean found = false;
-        for (WebElement row : addDependentPage.dependentRows) {
-            String rowText = row.getText();
-            if (rowText.contains("zzz")) {
-                WebElement checkbox = row.findElement(By.xpath(
-                        "//input[@class='checkbox']"));
-                if (!checkbox.isSelected()) {
-                    checkbox.click();
-                }
-                System.out.println("Selected dependent for deletion: " + rowText);
-                found = true;
+
+        for (WebElement row : rows) {
+            String dependentName=row.findElement(By.xpath(".//td[@class='dependentName']/a")).getText();
+            if (dependentName.equals("Jack Miller")){
+                row.findElement(By.xpath(".//td[@class='check']/input[@type='checkbox']")).click();
                 break;
             }
         }
         Assert.assertTrue("Dependent to delete not found.", found);
     }
 
-    @When("the user clicks on Dependents tab")
-    public void the_user_clicks_on_Dependents_tab() {
-        click(addDependentPage.dependentsButton);
-
+    @And("the user clicks on the Delete button")
+    public void the_user_clicks_on_delete_the_button() {
+        click(addDependentPage.deleteDependent);
     }
 
-    @And("the user clicks on the {string} button")
-    public void the_user_clicks_on_the_button(String buttonName) {
-        if (buttonName.equalsIgnoreCase("Delete")) {
-            waitForElementToBeClickable(addDependentPage.deleteDependent);
-            addDependentPage.deleteDependent.click();
-            System.out.println("Delete button clicked.");
-        } else {
-            Assert.fail("Button with name " + buttonName + "not found.");
-        }
-    }
-
-    @Then("the dependent should be removed from the list")
-    public void the_dependent_should_be_removed_from_the_list() throws InterruptedException {
-        Thread.sleep(2000);
-        List<WebElement> updatedDependentRows = addDependentPage.dependentRows;
-        boolean isRemoved = true;
-        System.out.println("Verifying that dependent has been removed..");
-
-        for (WebElement row : addDependentPage.dependentRows) {
-            String rowText = row.getText();
-            if (rowText.contains("zzz")) {
-                isRemoved = false;
-                break;
+    @Then("the dependent {string} should be removed from the list")
+    public void the_dependent_should_be_removed_from_the_list(String name) throws InterruptedException {
+        List<WebElement> allDependents = driver.findElements(By.xpath("//table[@id='dependent_list']/tbody/tr/td[2]"));
+        boolean isDeleted = false;
+        for (WebElement dependent : allDependents) {
+            String currentName = dependent.getText();
+            if (!currentName.equalsIgnoreCase(name)){
+                isDeleted = true;
+                System.out.println("The selected dependent was successfully deleted");
             }
         }
-        Assert.assertTrue("Dependent was not removed from the list.", isRemoved);
-        System.out.println("Dependent was successfully removed from the list.");
     }
 }

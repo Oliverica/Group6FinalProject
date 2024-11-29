@@ -5,6 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import utils.CommonMethods;
 import utils.ConfigReader;
@@ -24,6 +25,8 @@ public class LoginDetailsSteps extends CommonMethods {
         Assert.assertEquals("Welcome Admin",
                 dashboardPage.welcomeMessage.getText());
         Assert.assertTrue(dashboardPage.welcomeMessage.isDisplayed());
+        Assert.assertTrue("Dashboard page is not displayed",
+                dashboardPage.welcomeMessage.isDisplayed());
     }
 
     @Then("user clicks on PIM option")
@@ -68,7 +71,6 @@ public class LoginDetailsSteps extends CommonMethods {
         sendText(firstName, addEmployeePage.firstNameField);
         sendText(lastName, addEmployeePage.lastNameField);
         sendText(employeeID, addEmployeePage.employeeIDField);
-
     }
 
     @When("user selects the checkbox {string} in the Add Employee page")
@@ -82,6 +84,28 @@ public class LoginDetailsSteps extends CommonMethods {
                 throw new RuntimeException("Invalid checkbox name:" + checkBoxName);
 
         }
+    }
+
+    @Then("there should be no error messages under password and confirm password fields")
+    public void there_should_be_no_error_messages_under_password_and_confirm_password_fields() {
+        try {
+            Assert.assertFalse("Error message is displayed under the password field",
+                    addEmployeePage.passwordError.isDisplayed());
+        }catch (NoSuchElementException e) {
+            System.out.println("No error message under field as expected");
+        }
+        try {
+            Assert.assertFalse("Error message is displayed under the confirm password field",
+                    addEmployeePage.confirmPasswordError.isDisplayed());
+        }catch (NoSuchElementException e) {
+            System.out.println("No error message under confirm password field as expected");
+        }
+    }
+    @Then("status dropdown should display {string}")
+    public void status_dropdown_should_display(String expectedStatus) {
+        String actualStatus=getSelectedOption(addEmployeePage.statusDropdown);
+        Assert.assertEquals("Status dropdown value is incorrect",
+                expectedStatus,actualStatus);
     }
 
     @Then("username, password fields, and status field are enabled")
@@ -195,11 +219,14 @@ public class LoginDetailsSteps extends CommonMethods {
 
     }
 
-
-    @Then("error message {string} should be displayed here")
-    public void errorMessageShouldBeDisplayedHere(String expectedMessage) {
-        String actualMessage = addEmployeePage.passwordMismatchError.getText();
-        Assert.assertEquals("Passwords do not match", expectedMessage, actualMessage);
+    @Then("error message {string} should be displayed")
+    public void error_message_should_be_displayed(String expectedMessage) {
+        waitForVisibility(addEmployeePage.confirmPasswordError);
+        String actualMessage = addEmployeePage.confirmPasswordError.getText();
+        System.out.println("Actual error message: " + actualMessage);
+        Assert.assertEquals("Error message is incorrect", expectedMessage, actualMessage);
     }
+
+
 }
 

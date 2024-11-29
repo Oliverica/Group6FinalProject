@@ -49,7 +49,7 @@ public class AddDependentPage extends CommonMethods {
     @FindBy(xpath = "//select[@class='ui-datepicker-year']")
     public WebElement yearDropdown;
 
-    @FindBy(xpath = "//table[@class='ui-datepicker-calendar']/tbody/tr/td")
+    @FindBy(xpath = "//table[@class='ui-datepicker-calendar']/tbody/tr")
     public List<WebElement> dayDropdown;
 
     @FindBy(id = "empsearch_employee_name_empName")
@@ -88,11 +88,21 @@ public class AddDependentPage extends CommonMethods {
     @FindBy(xpath = "//form[@id='frmEmpDelDependents']")
     public WebElement assignedDependentsTable;
 
+    @FindBy(xpath = "//table[@id='dependent_list']/tbody/tr/td[2]")
+    public WebElement dependentsNames;
+
     @FindBy(xpath = "//table[@id='dependent_list']/tbody/tr")
     public List<WebElement> dependentRows;
+
     public List<WebElement> getDependentsRows(){
         return dependentRows;
     }
+
+    @FindBy(xpath = "//table[@id='dependent_list']/tbody/tr/td[1]")
+    public WebElement dependentCheckbox;
+
+    @FindBy(xpath = "//div[@class='message success fadable']")
+    public WebElement savedMessage;
 
     public AddDependentPage() {
         PageFactory.initElements(driver, this);

@@ -16,15 +16,16 @@ Feature: Create login details for an employee
 
   @checkboxChecked @group6
   Scenario: Create login details with the checkbox checked
-    When user fills mandatory fields "John","Lee", and "12345" for First Name,Last Name, and Employee ID
+    When user fills mandatory fields "John","Lee", and "22178277" for First Name,Last Name, and Employee ID
     And user selects the checkbox "Create login details" in the Add Employee page
     Then username, password fields, and status field are enabled
     When user enters "john.lee" as username
     And user enters "PASSWORD!!pass456" as password
     And user confirms the password "PASSWORD!!pass456"
-    And user selects "Enabled" as the status from the dropdown
+    And there should be no error messages under password and confirm password fields
+    And status dropdown should display "Enabled"
     And user clicks "Save"
-    Then user should be navigated to the "Employee Profile" page
+    Then user should be navigated to the "Human Management System" page
 
   @passwordMismatch @group6
   Scenario: Error displayed for password mismatch
@@ -34,4 +35,4 @@ Feature: Create login details for an employee
     And user enters "PASSWORD!!pass789" as the password
     And user confirms password as "wrongPASS123!"
     And user clicks the "Save" button
-    Then error message "Passwords do not match" should be displayed here
+    Then error message "Passwords do not match" should be displayed
