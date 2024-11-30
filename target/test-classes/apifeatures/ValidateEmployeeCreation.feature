@@ -2,6 +2,7 @@ Feature: Validate Employee Creation API
   As a tester
   I want to validate the API for creating a new employee record
   So that employee details are stored correctly and error handling works for invalid or incomplete data
+
   Background:
     Given request to generate token with valid email "admin_access@google.com" and valid password "Password123" is prepared
     When POST request to generate token is called
