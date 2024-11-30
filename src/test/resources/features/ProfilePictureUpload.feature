@@ -22,7 +22,7 @@ Feature: Profile Photo Upload
     Then dimensions 200 px x 200 px are verified
     And recommended message "Accepts jpg, .png, .gif up to 1MB. Recommended dimensions: 200px X 200px" is displayed
 
-  @profilePhotoUpload @validProfilePhoto @passed 
+  @profilePhotoUpload @validProfilePhoto @passed
   Scenario: Uploading a photo on an employee's profile
     When user selects a file with a .jpg, .png, or .gif extension under 1MB and dimensions are 200px x 200px
     Then profile picture is successfully uploaded and message "Successfully Uploaded" is displayed
