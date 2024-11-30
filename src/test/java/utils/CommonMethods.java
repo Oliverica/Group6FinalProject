@@ -26,9 +26,7 @@ public class CommonMethods extends PageInitializer{
 
         switch (ConfigReader.read("browser")) {
             case "Chrome":
-                ChromeOptions options = new ChromeOptions();
-                options.addArguments("--headless");
-                driver = new ChromeDriver(options);
+                driver = new ChromeDriver();
                 break;
             case "FireFox":
                 driver = new FirefoxDriver();
@@ -132,6 +130,5 @@ public class CommonMethods extends PageInitializer{
         Random random = new Random();
         return 100000 + random.nextInt(900000); //generates number fromm 100000 to 900000
     }
-
 
 }

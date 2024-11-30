@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import utils.CommonMethods;
+import utils.Constants;
 import utils.ExcelReader;
 
 import java.io.IOException;
@@ -39,7 +40,7 @@ public class PictureUploadSteps extends CommonMethods {
         try {
             List<Map<String, String>> employeeDetails = ExcelReader.read();
             for (Map<String, String> employee : employeeDetails) {
-                sendText(employee.get("Unsupported File Format"), employeeProfilePage.chooseFileButton);
+                sendText(Constants.PHOTO_FORMAT_FILE_PATH, employeeProfilePage.chooseFileButton);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -59,7 +60,7 @@ public class PictureUploadSteps extends CommonMethods {
         try {
             List<Map<String, String>> employeeDetails = ExcelReader.read();
             for (Map<String, String> employee : employeeDetails) {
-                sendText(employee.get("Exceeded 1MB"), employeeProfilePage.chooseFileButton);
+                sendText(Constants.PHOTO_EXCEEDED_FILE_PATH, employeeProfilePage.chooseFileButton);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -79,7 +80,7 @@ public class PictureUploadSteps extends CommonMethods {
         try {
             List<Map<String, String>> employeeDetails = ExcelReader.read();
             for (Map<String, String> employee : employeeDetails) {
-                sendText(employee.get("Incorrect Dimensions"), employeeProfilePage.chooseFileButton);
+                sendText(Constants.PHOTO_DIMENSIONS_FILE_PATH, employeeProfilePage.chooseFileButton);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -109,7 +110,7 @@ public class PictureUploadSteps extends CommonMethods {
         try {
             List<Map<String, String>> newEmployeeDetails = ExcelReader.read();
             for (Map<String, String> employee : newEmployeeDetails) {
-                sendText(employee.get("Profile Photo"), employeeProfilePage.chooseFileButton);
+                sendText(Constants.PHOTO_FILE_PATH, employeeProfilePage.chooseFileButton);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

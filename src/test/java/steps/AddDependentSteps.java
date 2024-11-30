@@ -118,7 +118,7 @@ public class AddDependentSteps extends CommonMethods {
 
         selectFromDropDown(addDependentPage.monthDropdown, monthText);
         selectFromDropDown(addDependentPage.yearDropdown, year);
-        for (WebElement date : addDependentPage.dayElement) {
+        for (WebElement date : addDependentPage.dayDropdown) {
             if (date.getText().equals(day)) {
                 date.click();
                 break;
