@@ -12,7 +12,7 @@ public class Hooks extends CommonMethods {
         openBrowserAndLaunchApplication();
     }
 
-    @After
+/*    @After
     public void end(Scenario scenario) {
         byte [] pic;
         if (scenario.isFailed()){
@@ -22,5 +22,5 @@ public class Hooks extends CommonMethods {
         }
         scenario.attach(pic, "image/png", scenario.getName());
         closeBrowser();
-    }
+    }*/
 }

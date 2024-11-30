@@ -1,5 +1,6 @@
 package steps;
 
+import io.cucumber.java.en.And;
 import utils.DBReader;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -20,12 +21,15 @@ public class AddEmployeeSteps extends CommonMethods {
     public static String expectedMiddleName;
     public static String expectedLastName;
 
+    @And("user clicks on PIM option")
+    public void userClicksOnPIMOption() {
+        click(dashboardPage.pimMenuButton);
+    }
+
     @When("user clicks on Add Employee button")
     public void user_clicks_on_add_employee_button() {
         click(dashboardPage.addEmployeeButton);
     }
-
-
 
     @When("user enters an employee full name")
     public void user_enters_an_employee_full_name() {

@@ -36,7 +36,7 @@ Feature: Validate Employee Creation API
     And the error message should be displayed
 
 
-  @missingFields @api
+  @missingFields @api @group6
   Scenario: Validate missing fields in payload
     Given a payload is prepared with employee details and missing fields
       |emp_firstname|emp_lastname|emp_middle_name|emp_gender|emp_birthday|emp_status|emp_job_title|
@@ -45,7 +45,7 @@ Feature: Validate Employee Creation API
     Then the status code should be 400
     Then the response should indicate that the payload is incomplete
 
-  @invalidStatus @api
+  @invalidStatus @api @group6
   Scenario: Validate API with invalid status
     Given a payload is prepared with employee details and invalid status
       |emp_firstname|emp_lastname|emp_middle_name|emp_gender|emp_birthday|emp_status|emp_job_title|

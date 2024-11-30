@@ -14,7 +14,7 @@ Feature: Add Dependents to Employee Profile
     Then the user clicks on Dependent tab
 
 
-  @getTheUser @Olivera
+  @getTheUser @Olivera @group6
   Scenario Outline: Add a dependent with a valid data
     And the user clicks on Add button to add dependent
     When the user enters dependent name as "<name>"
@@ -28,7 +28,7 @@ Feature: Add Dependents to Employee Profile
       |Michael Jordan|Parent     |1960-09-11 |
 
 
-  @missingOrInvalidFields @Olivera
+  @missingOrInvalidFields @Olivera @group6
   Scenario Outline: Add a dependent with with missing or invalid fields
     And the user clicks on Add button to add dependent
     When the user sends a request to add a dependent with a following data: a dependent with "<name>",and "<relationship>"
@@ -39,7 +39,7 @@ Feature: Add Dependents to Employee Profile
       |Michael Lee   |Child        |Required        |
       |              |Parent       |Required        |
 
-  @addMultiple @Olivera
+  @addMultiple @Olivera @group6
   Scenario: Add multiple dependents for an employee
     When the user sends a request to add a dependent with a following data:
       |name          |relationship|dateOfBirth|
@@ -47,7 +47,7 @@ Feature: Add Dependents to Employee Profile
       |Michael Lee   |Child       |2000-01-11 |
     Then the response should confirm all dependents were added successfully
 
-  @edit @Olivera
+  @edit @Olivera @group6
   Scenario Outline: Display dependents in the HRMS system and make sure they are editable
     When the user views  the dependent list for an employee
     Then the dependent list should display all added dependents
@@ -58,7 +58,7 @@ Feature: Add Dependents to Employee Profile
       |currentName|newName|
       |Michael Lee|Michael Musk |
 
-  @delete @Olivera
+  @delete @Olivera @group6
   Scenario Outline: Verify successful deletion
     When the user clicks on Dependents tab
     And the user selects a dependent to delete "<newName>"

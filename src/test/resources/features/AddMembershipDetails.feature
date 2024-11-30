@@ -4,13 +4,13 @@ Feature:
     Given employee logs in with valid username "JackJohn88" and password "Isabella_Carter@123!"
     When employee clicks on My Info button
 
-  @EditableAndDisplayed @Full
+  @EditableAndDisplayed @Full @group6
   Scenario: Validate
     When employee clicks on Membership button
     And employee click on Add Top Button
     Then employee can see all the required fields are displayed and editable
 
-  @CheckRequiredFields @Full
+  @CheckRequiredFields @Full @group6
   Scenario: Check The required Fields
     When employee clicks on Membership button
     And employee click on Add Top Button
@@ -23,7 +23,7 @@ Feature:
     Then employee clicks on Save membership button
     And message "Successfully Saved" is displayed
 
-  @EditAndCheck @Full
+  @EditAndCheck @Full @group6
   Scenario: Edit employee details and check
     When employee clicks on Membership button
     When employee click on membership "Membership1"
@@ -37,7 +37,7 @@ Feature:
     And message "Successfully Saved" is displayed
     Then all the saved details are checked "Elsayed Masoud","Individual","300.00","ALL","2010-02-22","2010-12-11"
 
-  @Delete @Full
+  @Delete @Full @group6
   Scenario:Delete the membership as an employee
     When employee clicks on Membership button
     When employee select "Membership1"

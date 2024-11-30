@@ -14,6 +14,7 @@ public class UserCreationSteps {
     @Given("request is prepared by providing name {string}, email {string} and password {string}")
     public void request_is_prepared_by_providing_name_email_and_password(String name, String email, String password) {
         APIConstants.request = given().
+                header(APIConstants.HEADER_CONTENT_TYPE_KEY, APIConstants.HEADER_CONTENT_TYPE_VALUE).
                 body(APIPayloadConstants.createUser(name, email, password));
     }
 
@@ -41,27 +42,22 @@ public class UserCreationSteps {
     }
 
 
-
     @Then("the status for this is {int}")
     public void the_status_for_this_is(Integer statusCode) {
         APIConstants.response.then().assertThat().statusCode(statusCode);
-
     }
 
     @Then("the error message appears {string}")
     public void the_error_message_appears(String expectedErrorMessage) {
         String errorMessage = null;
-        // Check if the response contains the "Message" field for duplicate email error
         if (APIConstants.response.jsonPath().get("Message") != null) {
             errorMessage = APIConstants.response.jsonPath().getString("Message");
         }
-        // Check if the response contains "condition" and "data" for invalid email or missing fields
         else if (APIConstants.response.jsonPath().get("condition") != null &&
                 APIConstants.response.jsonPath().get("data") != null) {
             // Get the error message from the "data" field
             errorMessage = APIConstants.response.jsonPath().getString("data");
         }
-        // Assert that the error message matches the expected message
         Assert.assertEquals("Error message does not match", expectedErrorMessage, errorMessage);
     }
 }

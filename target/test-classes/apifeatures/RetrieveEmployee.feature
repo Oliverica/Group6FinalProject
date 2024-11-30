@@ -6,7 +6,7 @@ Feature: Get the created employee
     Then response status code is 200
     Then token has to match JWT format
 
-  @3 @api @artem @valid
+  @api @artem @valid @group6
 Scenario: Get the created employee by valid ID
   Given a request is prepared to get the created the employee by valid ID "115714A"
   When a GET call is made to get the employee
@@ -15,7 +15,7 @@ Scenario: Get the created employee by valid ID
     |emp_firstname|emp_lastname|emp_middle_name|emp_gender|emp_birthday|emp_status|emp_job_title|
     |Matthew      |James       |Perry          |Male      |2000-11-06  |employed  |QA lead    |
 
-  @3 @api @artem @invalid
+  @api @artem @invalid @group6
   Scenario: Get the created employee by invalid ID
     Given a request is prepared to get the created the employee by invalid ID "115601Y"
     When a GET call is made to get the employee

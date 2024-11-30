@@ -9,13 +9,12 @@ Feature: Create login details for an employee
     Then user clicks on PIM option
     And user clicks on add employee option
 
-
-  @enable @Olivera
+  @enable @Olivera @group6
   Scenario: Enable login fields with the checkbox checked
     When user selects the checkbox "Create login details"
     Then username,password,confirm password, and status field should be enabled
 
-  @checkboxChecked  @Olivera
+  @checkboxChecked  @Olivera @group6
   Scenario: Create login details with the checkbox checked
     When user fills mandatory fields "John","Lee" for First Name,Last Name, and Employee ID
     And user selects the checkbox "Create login details" in the Add Employee page
@@ -29,8 +28,7 @@ Feature: Create login details for an employee
     And user clicks "Save"
     Then user should be navigated to the Human Management System page
 
-
-  @passwordMismatch @Olivera
+  @passwordMismatch @Olivera @group6
   Scenario: Error displayed for password mismatch
     When user fills mandatory fields "Jane" and "Brown" for First Name and Last Name
     And user selects the "Create login details"
@@ -39,5 +37,3 @@ Feature: Create login details for an employee
     And user confirms password as "wrongPASS123!"
     And user clicks the "Save" button
     Then error message "Passwords do not match" should be visible
-
-

@@ -65,7 +65,6 @@ public class LoginDetailsSteps extends CommonMethods {
                 break;
             default:
                 throw new RuntimeException("Invalid checkbox name:" + checkBoxName);
-
         }
     }
 
@@ -85,41 +84,40 @@ public class LoginDetailsSteps extends CommonMethods {
     @When("user enters {string} as password")
     public void user_enters_as_password(String password) {
         sendText(password, addEmployeePage.passwordField);
-
     }
 
     @And("user confirms the password {string}")
     public void user_confirms_the_password(String confirmPassword) {
         sendText(confirmPassword, addEmployeePage.confirmPasswordField);
-
     }
 
     @Given("user selects {string} as the status from the dropdown")
     public void user_selects_as_the_status_from_the_dropdown(String status) {
         selectFromDropDown(status, addEmployeePage.statusDropdown);
-
     }
+
     @Then("there should be no error messages under password and confirm password fields")
     public void there_should_be_no_error_messages_under_password_and_confirm_password_fields() {
         try {
             Assert.assertFalse("Error message is displayed under the password field",
                     addEmployeePage.passwordError.isDisplayed());
-        }catch (NoSuchElementException e) {
+        } catch (NoSuchElementException e) {
             System.out.println("No error message under field as expected");
         }
         try {
             Assert.assertFalse("Error message is displayed under the confirm password field",
                     addEmployeePage.confirmPasswordError.isDisplayed());
-        }catch (NoSuchElementException e) {
+        } catch (NoSuchElementException e) {
             System.out.println("No error message under confirm password field as expected");
         }
     }
+
     @Then("status dropdown should display {string}")
     public void status_dropdown_should_display(String expectedStatus) {
-        String actualStatus=getSelectedOption(addEmployeePage.statusDropdown);
+        String actualStatus = getSelectedOption(addEmployeePage.statusDropdown);
 
         Assert.assertEquals("Status dropdown value is incorrect",
-                expectedStatus,actualStatus);
+                expectedStatus, actualStatus);
     }
 
     @When("user clicks {string}")
@@ -131,16 +129,13 @@ public class LoginDetailsSteps extends CommonMethods {
             default:
                 throw new RuntimeException("Invalid button name: " + buttonName);
         }
-
     }
 
     @Then("user should be navigated to the Human Management System page")
     public void userShouldBeNavigatedToTheHumanManagementSystemPage() {
-        String actualTitle=driver.getCurrentUrl();
-        Assert.assertNotEquals(actualTitle,"http://hrm.syntaxtechs.net/humanresources/symfony/web/index.php/pim/addEmployee");
-
+        String actualTitle = driver.getCurrentUrl();
+        Assert.assertNotEquals(actualTitle, "http://hrm.syntaxtechs.net/humanresources/symfony/web/index.php/pim/addEmployee");
     }
-
 
     @When("user fills mandatory fields {string} and {string} for First Name and Last Name")
     public void user_fills_mandatory_fields_and_for_first_name_and_last_name(
@@ -166,19 +161,16 @@ public class LoginDetailsSteps extends CommonMethods {
     @When("user sets {string} as username")
     public void user_sets_as_username(String username) {
         sendText(username, addEmployeePage.usernameField);
-
     }
 
     @When("user enters {string} as the password")
     public void user_enters_as_the_password(String password) {
         sendText(password, addEmployeePage.passwordField);
-
     }
 
     @When("user confirms password as {string}")
     public void user_confirms_password_as(String confirmPassword) {
         sendText(confirmPassword, addEmployeePage.confirmPasswordField);
-
     }
 
     @When("user clicks the {string} button")
@@ -190,7 +182,6 @@ public class LoginDetailsSteps extends CommonMethods {
             default:
                 throw new RuntimeException("Invalid button name: " + buttonSave);
         }
-
     }
 
     @Then("error message {string} should be visible")
@@ -200,9 +191,7 @@ public class LoginDetailsSteps extends CommonMethods {
         String actualMessage = addEmployeePage.confirmPasswordError.getText();
         System.out.println("Actual error message: " + actualMessage);
         Assert.assertEquals("Error message is incorrect", expectedMessage, actualMessage);
-
     }
-
 
     @When("user logins with valid credentials as {string} and {string}")
     public void userLoginsWithValidCredentialsAsAnd(String userName, String password) {
@@ -219,7 +208,7 @@ public class LoginDetailsSteps extends CommonMethods {
 
     @When("username is generated based on ID")
     public void usernameIsGeneratedBasedOnID() {
-        String username="user"+addEmployeePage.employeeIDField.getAttribute("value");
+        String username = "user" + addEmployeePage.employeeIDField.getAttribute("value");
         sendText(username, addEmployeePage.usernameField);
         System.out.println(username);
     }
